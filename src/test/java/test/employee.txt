@@ -1,0 +1,15 @@
+id,主键
+employee_name,姓名
+idcard,身份证号
+mobile_phone,手机号
+employee_id,员工编码
+sex,性别
+age,年龄
+entry_date,入职时间
+quit_date,离职时间
+service_years,服务年限
+company_name,公司名
+service_status,在职状态
+phasename,贷款状态
+loan_unfinish_amt,贷款剩余应还本金
+leave_control,离职管控方式
