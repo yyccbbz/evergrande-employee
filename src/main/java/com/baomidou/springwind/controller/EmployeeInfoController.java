@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.common.utils.StringUtil;
 import com.baomidou.springwind.entity.EmployeeInfo;
 import com.baomidou.springwind.service.IEmployeeInfoService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -88,7 +90,7 @@ public class EmployeeInfoController extends BaseController {
             userPage = employeeInfoService.selectPageByParams(page, employeeInfo);
         } else {
             userPage = employeeInfoService.selectPage(page,
-                    new EntityWrapper<EmployeeInfo>().orderBy("report_date", false));
+                    new EntityWrapper<EmployeeInfo>().orderBy("quit_date", false));
         }
         return jsonPage(userPage);
     }
@@ -140,6 +142,25 @@ public class EmployeeInfoController extends BaseController {
         ArrayList<EmployeeInfo> list = new ArrayList<>();
         for (int i = 1; i <= 100; i++) {
             EmployeeInfo u = new EmployeeInfo();
+            u.setId(-1L);
+            u.setEmployeeName(StringUtils.EMPTY);
+            u.setIdcard(StringUtils.EMPTY);
+            u.setMobilePhone(StringUtils.EMPTY);
+            u.setEmsId(StringUtils.EMPTY);
+            u.setEmployeeId(StringUtils.EMPTY);
+            u.setSex(StringUtils.EMPTY);
+            u.setAge(StringUtils.EMPTY);
+            u.setEntryDate(StringUtils.EMPTY);
+            u.setQuitDate(StringUtils.EMPTY);
+            u.setServiceYears(new BigDecimal(-1));
+            u.setCompanyName(StringUtils.EMPTY);
+            u.setServiceStatus(StringUtils.EMPTY);
+            u.setPhasename(StringUtils.EMPTY);
+            u.setLoanUnfinishAmt(new BigDecimal(-1));
+            u.setLeaveControl(StringUtils.EMPTY);
+            u.setCreateTime(null);
+            u.setUpdateTime(null);
+
 //            u.setMobileNo(RandomStringUtils.randomNumeric(11));
 //            u.setMemberNo(RandomStringUtils.randomAlphanumeric(10));
 //            u.setUserName(RandomStringUtils.randomAlphabetic(5));
