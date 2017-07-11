@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.springwind.common.utils.DateUtil;
 import com.baomidou.springwind.common.utils.StringUtil;
-import com.baomidou.springwind.entity.FinalUser;
-import com.baomidou.springwind.service.IFinalUserService;
-import org.apache.commons.lang.RandomStringUtils;
+import com.baomidou.springwind.entity.EmployeeInfo;
+import com.baomidou.springwind.service.IEmployeeInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -23,27 +21,27 @@ import java.util.List;
 
 /**
  * <p>
- * 正式名单 前端控制器
+ * 员工贷款信息表 前端控制器
  * </p>
  *
  * @author CuiCan
- * @since 2017-05-17
+ * @since 2017-07-11
  */
 @Controller
-@RequestMapping("/clientList/finalUser")
-public class FinalUserController extends BaseController {
+@RequestMapping("/employeeInfo")
+public class EmployeeInfoController extends BaseController {
 
     @Autowired
-    private IFinalUserService finalUserService;
+    private IEmployeeInfoService employeeInfoService;
 
     /**
      * excel导出相关
      */
-    @Value("${finalUser.excelName}")
+    @Value("${employeeInfo.excelName}")
     private String excelName;
-    @Value("${finalUser.excelId}")
+    @Value("${employeeInfo.excelId}")
     private String excelId;
-    @Value("${finalUser.fields}")
+    @Value("${employeeInfo.fields}")
     private String excelFields;
 
     /**
@@ -52,7 +50,7 @@ public class FinalUserController extends BaseController {
     @Permission("5001")
     @RequestMapping("/list")
     public String list() {
-        return "/clientList/finalUser/list";
+        return "/employeeInfo/list";
     }
 
     @Permission("5001")
@@ -60,16 +58,16 @@ public class FinalUserController extends BaseController {
     public String search(Model model) {
 //        model.addAttribute("advisors",
 //                advisorService.selectList(new EntityWrapper<Advisor>().eq("is_valid", 1)));
-        return "/clientList/finalUser/search";
+        return "/employeeInfo/search";
     }
 
     @Permission("5001")
     @RequestMapping("/edit")
     public String edit(Model model, Long id) {
         if (id != null) {
-            model.addAttribute("user", finalUserService.selectById(id));
+            model.addAttribute("user", employeeInfoService.selectById(id));
         }
-        return "/clientList/finalUser/edit";
+        return "/employeeInfo/edit";
     }
 
 
@@ -83,13 +81,14 @@ public class FinalUserController extends BaseController {
 
         System.err.println("筛选条件 formData =" + _search);
 
-        Page<FinalUser> userPage = null;
-        Page<FinalUser> page = getPage();
+        Page<EmployeeInfo> userPage = null;
+        Page<EmployeeInfo> page = getPage();
         if (StringUtil.isNotEmpty(_search)) {
-            FinalUser finalUser = JSONObject.parseObject(_search, FinalUser.class);
-            userPage = finalUserService.selectPageByParams(page, finalUser);
+            EmployeeInfo employeeInfo = JSONObject.parseObject(_search, EmployeeInfo.class);
+            userPage = employeeInfoService.selectPageByParams(page, employeeInfo);
         } else {
-            userPage = finalUserService.selectPage(page, new EntityWrapper<FinalUser>().orderBy("report_date", false));
+            userPage = employeeInfoService.selectPage(page,
+                    new EntityWrapper<EmployeeInfo>().orderBy("report_date", false));
         }
         return jsonPage(userPage);
     }
@@ -97,15 +96,15 @@ public class FinalUserController extends BaseController {
     @ResponseBody
     @Permission("5001")
     @RequestMapping("/editUser")
-    public String editUser(FinalUser user) {
+    public String editUser(EmployeeInfo employee) {
         boolean rlt = false;
-        if (user != null) {
-            if (user.getId() != null) {
-                rlt = finalUserService.updateById(user);
+        if (employee != null) {
+            if (employee.getId() != null) {
+                rlt = employeeInfoService.updateById(employee);
             } else {
-                user.setCreateTime(new Date());
-                user.setUpdateTime(user.getCreateTime());
-                rlt = finalUserService.insert(user);
+                employee.setCreateTime(new Date());
+                employee.setUpdateTime(employee.getCreateTime());
+                rlt = employeeInfoService.insert(employee);
             }
         }
         return callbackSuccess(rlt);
@@ -115,7 +114,7 @@ public class FinalUserController extends BaseController {
     @Permission("5001")
     @RequestMapping("/delUser/{userId}")
     public String delUser(@PathVariable Long userId) {
-        Boolean rlt = finalUserService.deleteById(userId);
+        Boolean rlt = employeeInfoService.deleteById(userId);
         return rlt.toString();
     }
 
@@ -130,7 +129,7 @@ public class FinalUserController extends BaseController {
     public ModelAndView downloadExcel() {
 
         List<String> fields = Arrays.asList(excelFields.split(","));
-        List<FinalUser> beans = finalUserService.selectList(null);
+        List<EmployeeInfo> beans = employeeInfoService.selectList(null);
         return super.exportExcel(excelId, beans, null, fields, excelName);
     }
 
@@ -138,27 +137,27 @@ public class FinalUserController extends BaseController {
     @Permission("5001")
     @RequestMapping("addTestData")
     public String addTestData() {
-        ArrayList<FinalUser> list = new ArrayList<>();
+        ArrayList<EmployeeInfo> list = new ArrayList<>();
         for (int i = 1; i <= 100; i++) {
-            FinalUser u = new FinalUser();
-            u.setMobileNo(RandomStringUtils.randomNumeric(11));
-            u.setMemberNo(RandomStringUtils.randomAlphanumeric(10));
-            u.setUserName(RandomStringUtils.randomAlphabetic(5));
-            u.setUserType(Integer.parseInt(RandomStringUtils.random(1, new char[]{'1', '2', '3'})));
-            u.setReportDate(DateUtil.randomDate("2017-01-01", "2017-05-01"));
-            u.setRegisterTime(DateUtil.randomDate("2017-01-01", "2017-05-01"));
-            u.setIsVipuser(Integer.parseInt(RandomStringUtils.random(1, new char[]{'0', '1'})));
-            u.setVipDate(DateUtil.randomDate("2017-01-01", "2017-05-01"));
-            u.setAdvisorId(Integer.parseInt(RandomStringUtils.randomNumeric(4)));
-            u.setAdvisorName(RandomStringUtils.randomAlphabetic(6));
-            u.setUserMark(RandomStringUtils.randomAlphanumeric(6));
-            u.setIsPerformancePool(Integer.parseInt(RandomStringUtils.random(1, new char[]{'0', '1'})));
+            EmployeeInfo u = new EmployeeInfo();
+//            u.setMobileNo(RandomStringUtils.randomNumeric(11));
+//            u.setMemberNo(RandomStringUtils.randomAlphanumeric(10));
+//            u.setUserName(RandomStringUtils.randomAlphabetic(5));
+//            u.setUserType(Integer.parseInt(RandomStringUtils.random(1, new char[]{'1', '2', '3'})));
+//            u.setReportDate(DateUtil.randomDate("2017-01-01", "2017-05-01"));
+//            u.setRegisterTime(DateUtil.randomDate("2017-01-01", "2017-05-01"));
+//            u.setIsVipuser(Integer.parseInt(RandomStringUtils.random(1, new char[]{'0', '1'})));
+//            u.setVipDate(DateUtil.randomDate("2017-01-01", "2017-05-01"));
+//            u.setAdvisorId(Integer.parseInt(RandomStringUtils.randomNumeric(4)));
+//            u.setAdvisorName(RandomStringUtils.randomAlphabetic(6));
+//            u.setUserMark(RandomStringUtils.randomAlphanumeric(6));
+//            u.setIsPerformancePool(Integer.parseInt(RandomStringUtils.random(1, new char[]{'0', '1'})));
             u.setCreateTime(new Date());
             u.setUpdateTime(u.getCreateTime());
             list.add(u);
             System.err.println(u);
         }
-        Boolean b = finalUserService.insertBatch(list);
+        Boolean b = employeeInfoService.insertBatch(list);
         return b.toString();
     }
 

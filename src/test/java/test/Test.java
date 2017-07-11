@@ -27,18 +27,15 @@ public class Test {
                 String[] strs = lineTxt.split(",");
                 String s1 = strs[0];//中文
                 String s2 = strs[1];//表字段
-//                String s3 = strs[2];//类属性
+                String s3 = strs[2];//类属性
 
-                String sql = "`"+s1+"`  VARCHAR(100) NULL DEFAULT NULL COMMENT '"+s2+"' ,";
-                System.err.println(sql);
-
-//                String field = "{ field: '" + s3 + "', title: '" + s1 + "', sortable:'true',  align: 'center', valign: 'middle' },";
+                String field = "{ field: '" + s3 + "', title: '" + s1 + "', sortable:'true',  align: 'center', valign: 'middle' },";
 //                System.err.println(field);
-//
-//                String excelLine = "<field name=\""+s3+"\" title=\""+s1+"\"/>";
-//                System.err.println(excelLine);
-//                sb.append(s3);
-//                sb.append(",");
+
+                String excelLine = "<field name=\""+s3+"\" title=\""+s1+"\"/>";
+                System.err.println(excelLine);
+                sb.append(s3);
+                sb.append(",");
 
             }
 

@@ -41,6 +41,7 @@ CREATE TABLE `employee_info` (
   `employee_name`  VARCHAR(100) NULL DEFAULT NULL COMMENT '姓名' ,
   `idcard`  VARCHAR(100) NULL DEFAULT NULL COMMENT '身份证号' ,
   `mobile_phone`  VARCHAR(100) NULL DEFAULT NULL COMMENT '手机号' ,
+  `ems_id`  VARCHAR(100) NULL DEFAULT NULL COMMENT 'EMS号' ,
   `employee_id`  VARCHAR(100) NULL DEFAULT NULL COMMENT '员工编码' ,
   `sex`  VARCHAR(2) NULL DEFAULT NULL COMMENT '性别' ,
   `age`  VARCHAR(20) NULL DEFAULT NULL COMMENT '年龄' ,
@@ -55,9 +56,12 @@ CREATE TABLE `employee_info` (
   `create_time`  TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
   `update_time`  TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
   PRIMARY KEY (`id`),
-  INDEX `index_t_mobile_no` (`t_mobile_no`) USING BTREE COMMENT '推荐人手机号索引',
-  INDEX `index_bt_register_time` (`bt_register_time`) USING BTREE COMMENT '被推荐人注册时间索引'
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='获客信息';
+  INDEX `index_employee_name` (`employee_name`) USING BTREE COMMENT '姓名索引',
+  INDEX `index_idcard` (`idcard`) USING BTREE COMMENT '身份证号索引',
+  INDEX `index_mobile_phone` (`mobile_phone`) USING BTREE COMMENT '手机号索引',
+  INDEX `index_ems_id` (`ems_id`) USING BTREE COMMENT 'EMS号索引',
+    INDEX `index_employee_id` (`employee_id`) USING BTREE COMMENT '员工编号索引'
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='员工贷款信息表';
 
 
 

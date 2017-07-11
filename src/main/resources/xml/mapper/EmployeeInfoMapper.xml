@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baomidou.springwind.mapper.EmployeeInfoMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.EmployeeInfo">
+		<id column="id" property="id" />
+		<result column="employee_name" property="employeeName" />
+		<result column="idcard" property="idcard" />
+		<result column="mobile_phone" property="mobilePhone" />
+		<result column="ems_id" property="emsId" />
+		<result column="employee_id" property="employeeId" />
+		<result column="sex" property="sex" />
+		<result column="age" property="age" />
+		<result column="entry_date" property="entryDate" />
+		<result column="quit_date" property="quitDate" />
+		<result column="service_years" property="serviceYears" />
+		<result column="company_name" property="companyName" />
+		<result column="service_status" property="serviceStatus" />
+		<result column="phasename" property="phasename" />
+		<result column="loan_unfinish_amt" property="loanUnfinishAmt" />
+		<result column="leave_control" property="leaveControl" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+
+</mapper>
