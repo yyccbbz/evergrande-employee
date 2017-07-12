@@ -1,20 +1,17 @@
 package com.baomidou.springwind.common.http;
 
 import org.apache.http.conn.HttpClientConnectionManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class IdleConnectionEvictor extends Thread {
 
-    @Autowired
-    private HttpClientConnectionManager connMgr;
+    private final HttpClientConnectionManager connMgr;
 
     private volatile boolean shutdown;
 
-    public IdleConnectionEvictor() {
-        super();
-        super.start();
+    public IdleConnectionEvictor(HttpClientConnectionManager connMgr) {
+        this.connMgr = connMgr;
+        // 自启动
+        this.start();
     }
 
     @Override
@@ -32,7 +29,6 @@ public class IdleConnectionEvictor extends Thread {
         }
     }
 
-    //关闭清理无效连接的线程
     public void shutdown() {
         shutdown = true;
         synchronized (this) {
