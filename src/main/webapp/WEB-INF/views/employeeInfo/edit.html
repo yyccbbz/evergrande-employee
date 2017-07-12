@@ -23,11 +23,6 @@
    <form id="myForm" class="form-horizontal" autocomplete="off" data-validator-option="{theme:'default'}">
    	   <input type="hidden" name="id" value="$!{user.id}">
 
-       <!--#id,employeeName,idcard,mobilePhone,emsId,
-        employeeId,sex,age,entryDate,quitDate,serviceYears,
-        companyName,serviceStatus,phasename,loanUnfinishAmt,
-        leaveControl,createTime,updateTime-->
-
        <div class="form-group"><label class="col-sm-2 control-label">姓名</label>
            <div class="col-sm-10">
                <input type="text" class="form-control" value="$!{user.employeeName}" name="employeeName" data-rule="姓名:required;employeeName"/>
@@ -74,79 +69,61 @@
        </div>
        <div class="hr-line-dashed"></div>
 
-       <div class="form-group"><label class="col-sm-2 control-label">上报日期</label>
+       <!--<div class="form-group"><label class="col-sm-2 control-label">性别</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control calendarBox" name="reportDate" id="reportDate">
+               <label class="checkbox-inline">
+                   <input type="radio" name="sex" value="1" checked> 男
+               </label>
+               <label class="checkbox-inline">
+                   <input type="radio" name="sex" value="2"> 女
+               </label>
+           </div>
+       </div>
+       <div class="hr-line-dashed"></div>-->
+
+       <!--#id,employeeName,idcard,mobilePhone,emsId,
+        employeeId,sex,age,
+        entryDate,quitDate,serviceYears,
+        companyName,serviceStatus,phasename,loanUnfinishAmt,
+        leaveControl,createTime,updateTime-->
+
+       <div class="form-group"><label class="col-sm-2 control-label">年龄</label>
+           <div class="col-sm-10">
+               <input type="text" class="form-control" value="$!{user.age}" name="age" data-rule="年龄:required;age"/>
+           </div>
+       </div>
+       <div class="hr-line-dashed"></div>
+
+       <div class="form-group"><label class="col-sm-2 control-label">入职时间</label>
+           <div class="col-sm-10">
+               <input type="text" class="form-control calendarBox" name="entryDate" id="entryDate">
                <div class="glyphicon glyphicon-calendar"></div>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
-       <div class="form-group"><label class="col-sm-2 control-label">注册时间</label>
+       <div class="form-group"><label class="col-sm-2 control-label">离职时间</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control calendarBox" id="registerTime" name="registerTime">
+               <input type="text" class="form-control calendarBox" id="quitDate" name="quitDate">
                <div class="glyphicon glyphicon-calendar"></div>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
-       <div class="form-group"><label class="col-sm-2 control-label">是否vip</label>
+       <div class="form-group"><label class="col-sm-2 control-label">服务年限</label>
            <div class="col-sm-10">
-               <label class="checkbox-inline">
-                   <input type="radio" name="isVipuser" value="1" checked> 是
-               </label>
-               <label class="checkbox-inline">
-                   <input type="radio" name="isVipuser" value="0"> 否
-               </label>
+               <input type="text" class="form-control" name="serviceYears" value="$!{user.serviceYears}">
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
-       <div class="form-group"><label class="col-sm-2 control-label">成为vip日期</label>
+       <div class="form-group"><label class="col-sm-2 control-label">公司名</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control calendarBox" name="vipDate" id="vipDate">
-               <div class="glyphicon glyphicon-calendar"></div>
+               <input type="text" class="form-control" name="companyName" value="$!{user.companyName}">
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
-       <div class="form-group"><label class="col-sm-2 control-label">投资顾问ID号</label>
-           <div class="col-sm-10">
-               <input type="text" class="form-control" name="advisorId" value="$!{user.advisorId}">
-           </div>
-       </div>
-       <div class="hr-line-dashed"></div>
-
-       <div class="form-group"><label class="col-sm-2 control-label">投资顾问姓名</label>
-           <div class="col-sm-10">
-               <input type="text" class="form-control" name="advisorName" value="$!{user.advisorName}">
-           </div>
-       </div>
-       <div class="hr-line-dashed"></div>
-
-       <div class="form-group"><label class="col-sm-2 control-label">客户标识</label>
-           <div class="col-sm-10">
-               <label class="checkbox-inline">
-                   <input type="radio" name="userMark" value="DKH000" checked> DKH000
-               </label>
-               <label class="checkbox-inline">
-                   <input type="radio" name="userMark" value="DKH001"> DKH001
-               </label>
-           </div>
-       </div>
-       <div class="hr-line-dashed"></div>
-
-       <div class="form-group"><label class="col-sm-2 control-label">是否业绩池</label>
-           <div class="col-sm-10">
-               <label class="checkbox-inline">
-                   <input type="radio" name="isPerformancePool" value="1" checked> 是
-               </label>
-               <label class="checkbox-inline">
-                   <input type="radio" name="isPerformancePool" value="0"> 否
-               </label>
-           </div>
-       </div>
-       <div class="hr-line-dashed"></div>
 
        <div class="form-group">
            <div class="text-center">

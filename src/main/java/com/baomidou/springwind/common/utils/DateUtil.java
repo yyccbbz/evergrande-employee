@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 日期工具类
- * @author lisuo
+ * @author CuiCan
  *
  */
 public abstract class DateUtil {

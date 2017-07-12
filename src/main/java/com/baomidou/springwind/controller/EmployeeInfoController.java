@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.springwind.common.utils.DateUtil;
 import com.baomidou.springwind.common.utils.StringUtil;
 import com.baomidou.springwind.entity.EmployeeInfo;
 import com.baomidou.springwind.service.IEmployeeInfoService;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -75,6 +77,7 @@ public class EmployeeInfoController extends BaseController {
 
     /**
      * CRUD
+     * http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188&employee_name=&idcard=&mobile_phone=&ems_id=&employee_id=
      */
     @ResponseBody
     @Permission("5001")
@@ -142,39 +145,30 @@ public class EmployeeInfoController extends BaseController {
         ArrayList<EmployeeInfo> list = new ArrayList<>();
         for (int i = 1; i <= 100; i++) {
             EmployeeInfo u = new EmployeeInfo();
-            u.setId(-1L);
-            u.setEmployeeName(StringUtils.EMPTY);
-            u.setIdcard(StringUtils.EMPTY);
-            u.setMobilePhone(StringUtils.EMPTY);
-            u.setEmsId(StringUtils.EMPTY);
-            u.setEmployeeId(StringUtils.EMPTY);
-            u.setSex(StringUtils.EMPTY);
-            u.setAge(StringUtils.EMPTY);
-            u.setEntryDate(StringUtils.EMPTY);
-            u.setQuitDate(StringUtils.EMPTY);
-            u.setServiceYears(new BigDecimal(-1));
-            u.setCompanyName(StringUtils.EMPTY);
-            u.setServiceStatus(StringUtils.EMPTY);
+            u.setEmployeeName("张三"+i);
+            u.setIdcard(RandomStringUtils.randomNumeric(18));
+            u.setMobilePhone(RandomStringUtils.randomNumeric(11));
+            u.setEmsId(RandomStringUtils.randomNumeric(9));
+            u.setEmployeeId(RandomStringUtils.randomNumeric(10));
+            u.setSex(RandomStringUtils.random(1, new char[]{'2', '1'}));
+            u.setAge(RandomStringUtils.randomNumeric(2));
+            u.setEntryDate(DateUtil.date2Str(DateUtil.randomDate("2017-01-01", "2017-03-12"),DateUtil.DEFAULT_DATE_FORMAT));
+            u.setQuitDate(DateUtil.date2Str(DateUtil.randomDate("2017-04-01", "2017-07-12"),DateUtil.DEFAULT_DATE_FORMAT));
+            u.setServiceYears(new BigDecimal(RandomStringUtils.randomNumeric(2)));
+            u.setCompanyName("恒大子公司"+i);
+            if (i%3 ==0) {
+                u.setServiceStatus("在职");
+            } else if (i%3 ==1) {
+                u.setServiceStatus("离职");
+            } else {
+                u.setServiceStatus("试用期");
+            }
             u.setPhasename(StringUtils.EMPTY);
-            u.setLoanUnfinishAmt(new BigDecimal(-1));
+            u.setLoanUnfinishAmt(new BigDecimal(RandomStringUtils.randomNumeric(4)));
             u.setLeaveControl(StringUtils.EMPTY);
-            u.setCreateTime(null);
-            u.setUpdateTime(null);
-
-//            u.setMobileNo(RandomStringUtils.randomNumeric(11));
-//            u.setMemberNo(RandomStringUtils.randomAlphanumeric(10));
-//            u.setUserName(RandomStringUtils.randomAlphabetic(5));
-//            u.setUserType(Integer.parseInt(RandomStringUtils.random(1, new char[]{'1', '2', '3'})));
-//            u.setReportDate(DateUtil.randomDate("2017-01-01", "2017-05-01"));
-//            u.setRegisterTime(DateUtil.randomDate("2017-01-01", "2017-05-01"));
-//            u.setIsVipuser(Integer.parseInt(RandomStringUtils.random(1, new char[]{'0', '1'})));
-//            u.setVipDate(DateUtil.randomDate("2017-01-01", "2017-05-01"));
-//            u.setAdvisorId(Integer.parseInt(RandomStringUtils.randomNumeric(4)));
-//            u.setAdvisorName(RandomStringUtils.randomAlphabetic(6));
-//            u.setUserMark(RandomStringUtils.randomAlphanumeric(6));
-//            u.setIsPerformancePool(Integer.parseInt(RandomStringUtils.random(1, new char[]{'0', '1'})));
             u.setCreateTime(new Date());
             u.setUpdateTime(u.getCreateTime());
+
             list.add(u);
             System.err.println(u);
         }

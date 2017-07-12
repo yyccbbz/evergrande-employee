@@ -9,6 +9,7 @@
 #姓名
 #身份证号
 #手机号
+#EMS号
 #员工编码
 #性别
 #年龄
@@ -65,6 +66,7 @@ select
  a.employee_name    #姓名
 ,a.idcard           #身份证号
 ,a.mobile_phone     #手机号
+,a.ems_id           #EMS号
 ,a.employee_id      #员工编码
 ,a.sex              #性别
 ,a.age              #年龄
@@ -165,7 +167,8 @@ order by serialno, begintime desc
 )t
 where rank=1
 )b on a.idcard=b.certid
-where a.idcard='370923198601152215' #证件号
+where a.employee_name like '%%'
+and a.idcard='' #证件号
 and a.mobile_phone='' #手机号
 and a.ems_id='' #EMS号
 and a.employee_id='' #员工ID
