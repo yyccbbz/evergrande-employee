@@ -13,7 +13,7 @@ import com.baomidou.springwind.excel.ExcelContext;
 import com.baomidou.springwind.excel.parsing.ExcelHeader;
 import com.baomidou.springwind.service.IPrivilegeService;
 import com.baomidou.springwind.service.IUserService;
-import com.baomidou.springwind.common.http.HttpAPIService;
+import com.baomidou.springwind.service.support.HttpAPIService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +42,6 @@ import java.util.List;
  * @Date 2016-04-13
  */
 public class BaseController extends SuperController implements HandlerInterceptor {
-
-    @Value("${base_http_url}")
-    protected String base_http_url;
-
-    @Resource
-    private HttpAPIService httpAPIService;
 
     @Autowired
     protected MailHelper mailHelper;
@@ -104,52 +98,7 @@ public class BaseController extends SuperController implements HandlerIntercepto
         return legal;
     }
 
-    /**
-     * http请求数据
-     *
-     * @param id
-     * @return
-     */
-    protected String parseHttpJsonResult(String id) {
 
-        String day = request.getParameter("day");
-        String today = DateUtil.thisDate();
-        String str = "";
-
-        if (StringUtils.isEmpty(day)) {
-            day = today;
-        }
-//http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188&employee_name=?&idcard=?&mobile_phone=?&ems_id=?&employee_id=?
-        if (StringUtils.isNotEmpty(id)) {
-            String url = base_http_url + id + "&date=" + day;
-//            System.err.println("url =" + url);
-            try {
-                str = httpAPIService.doGet(url);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            JSONArray values = JSON.parseObject(str, Feature.OrderedField).getJSONObject("details")
-                    .getJSONObject("list").getJSONArray("values");
-            // 首页，申请，电审，初审，复审，终审，审批汇总--24+2
-            String[] strarr1 = {"171", "172", "165", "166", "167", "164", "173"};
-            // 签约，放款--24+1
-            //String[] strarr2 = {"174","101"};
-            // 信审专员--24+0
-            //String[] strarr3 = {"100"};
-
-            // 如果当天，那么要看小时数
-            if (today.equals(day) && Arrays.asList(strarr1).contains(id) && values != null && values.size() > 0) {
-                String thisTime = DateUtil.thisTime();
-                String s = thisTime.split(":")[0];
-                int num = 24 - Integer.parseInt(s);
-                for (int i = 1; i < num; i++) {
-                    values.remove(0);
-                }
-            }
-            return values.toJSONString();
-        }
-        return str;
-    }
 
     /**
      * <p>

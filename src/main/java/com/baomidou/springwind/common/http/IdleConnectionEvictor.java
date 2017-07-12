@@ -10,7 +10,7 @@ public class IdleConnectionEvictor extends Thread {
 
     public IdleConnectionEvictor(HttpClientConnectionManager connMgr) {
         this.connMgr = connMgr;
-        // 自启动
+        // 启动线程
         this.start();
     }
 
@@ -19,7 +19,7 @@ public class IdleConnectionEvictor extends Thread {
         try {
             while (!shutdown) {
                 synchronized (this) {
-                    wait(5000);
+                    wait(30000);
                     // 关闭失效的连接
                     connMgr.closeExpiredConnections();
                 }

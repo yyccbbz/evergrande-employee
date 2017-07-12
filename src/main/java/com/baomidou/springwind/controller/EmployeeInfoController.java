@@ -1,6 +1,9 @@
 package com.baomidou.springwind.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -8,6 +11,7 @@ import com.baomidou.springwind.common.utils.DateUtil;
 import com.baomidou.springwind.common.utils.StringUtil;
 import com.baomidou.springwind.entity.EmployeeInfo;
 import com.baomidou.springwind.service.IEmployeeInfoService;
+import com.baomidou.springwind.service.support.HttpAPIService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/employeeInfo")
 public class EmployeeInfoController extends BaseController {
+
+    private final String BASE_HTTP_URL = "http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188";
+
+    @Autowired
+    private HttpAPIService httpAPIService;
 
     @Autowired
     private IEmployeeInfoService employeeInfoService;
@@ -85,6 +94,26 @@ public class EmployeeInfoController extends BaseController {
     public String getUserList(@RequestParam("_search") String _search) {
 
         System.err.println("筛选条件 formData =" + _search);
+
+        String day = request.getParameter("day");
+        String today = DateUtil.thisDate();
+        String str = "";
+
+        if (StringUtils.isEmpty(day)) {
+            day = today;
+        }
+//http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188&employee_name=?&idcard=?&mobile_phone=?&ems_id=?&employee_id=?
+        String url = BASE_HTTP_URL + "&date=" + day;
+//            System.err.println("url =" + url);
+        try {
+            str = httpAPIService.doGet(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JSONArray values = JSON.parseObject(str, Feature.OrderedField).getJSONObject("details")
+                .getJSONObject("list").getJSONArray("values");
+
+//        return values.toJSONString();
 
         Page<EmployeeInfo> userPage = null;
         Page<EmployeeInfo> page = getPage();
