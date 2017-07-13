@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2017-07-13
  */
 @Controller
-@RequestMapping("/springwind/queryMarketing")
+@RequestMapping("/queryMarketing")
 public class QueryMarketingController {
 	
 }

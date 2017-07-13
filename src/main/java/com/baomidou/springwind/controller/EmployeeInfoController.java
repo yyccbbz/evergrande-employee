@@ -74,9 +74,23 @@ public class EmployeeInfoController extends BaseController {
 
     @Permission("5001")
     @RequestMapping("/edit")
-    public String edit(Model model, Long id) {
-        if (id != null) {
-            model.addAttribute("user", employeeInfoService.selectById(id));
+    public String edit(Model model, String idcard) {
+        if (StringUtil.isNotEmpty(idcard)) {
+            String url = BASE_HTTP_URL + "&employee_name=" + "&idcard=" + idcard
+                    + "&mobile_phone=" + "&ems_id=" + "&employee_id=";
+            String dataStr = "";
+            try {
+                dataStr = httpAPIService.doGet(url);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            JSONArray values = JSON.parseObject(dataStr, Feature.OrderedField).getJSONObject("details")
+                    .getJSONObject("list").getJSONArray("values");
+            System.out.println("values = " + values);
+
+//TODO
+            EmployeeInfo info = (EmployeeInfo) JSONObject.parse(values.toString());
+            model.addAttribute("user", info);
         }
         return "/employeeInfo/edit";
     }

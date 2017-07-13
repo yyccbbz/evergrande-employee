@@ -29,7 +29,7 @@ public class QueryMarketing implements Serializable {
      * 员工姓名
      */
 	@TableField("employee_name")
-	private String employeeName;
+	private String employee_name;
     /**
      * 身份证号
      */
@@ -38,17 +38,17 @@ public class QueryMarketing implements Serializable {
      * 手机号
      */
 	@TableField("mobile_phone")
-	private String mobilePhone;
+	private String mobile_phone;
     /**
      * EMS号
      */
 	@TableField("ems_id")
-	private String emsId;
+	private String ems_id;
     /**
      * 员工编码
      */
 	@TableField("employee_id")
-	private String employeeId;
+	private String employee_id;
     /**
      * 性别
      */
@@ -61,42 +61,42 @@ public class QueryMarketing implements Serializable {
      * 入职日期
      */
 	@TableField("entry_date")
-	private String entryDate;
+	private String entry_date;
     /**
      * 离职日期
      */
 	@TableField("quit_date")
-	private String quitDate;
+	private String quit_date;
     /**
      * 是否VIP
      */
 	@TableField("is_vip")
-	private String isVip;
+	private String is_vip;
     /**
      * 服务年限
      */
 	@TableField("grp_service_years")
-	private String grpServiceYears;
+	private String grp_service_years;
     /**
      * 公司名称
      */
 	@TableField("company_name")
-	private String companyName;
+	private String company_name;
     /**
      * 在职状态
      */
 	@TableField("service_status")
-	private String serviceStatus;
+	private String service_status;
     /**
      * 特殊名单类型
      */
 	@TableField("special_title")
-	private String specialTitle;
+	private String special_title;
     /**
      * 是否特殊名单
      */
 	@TableField("is_special")
-	private String isSpecial;
+	private String is_special;
     /**
      * 贷款申请流水号
      */
@@ -113,7 +113,7 @@ public class QueryMarketing implements Serializable {
      * 贷款剩余应还本金
      */
 	@TableField("loan_unfinish_amt")
-	private BigDecimal loanUnfinishAmt;
+	private BigDecimal loan_unfinish_amt;
     /**
      * 员工住址
      */
@@ -126,27 +126,27 @@ public class QueryMarketing implements Serializable {
      * 申请金额
      */
 	@TableField("apply_amt")
-	private BigDecimal applyAmt;
+	private BigDecimal apply_amt;
     /**
      * 审批完成时间
      */
 	@TableField("app_endtime")
-	private String appEndtime;
+	private String app_endtime;
     /**
      * 是否审批拒绝
      */
 	@TableField("is_app_reject")
-	private String isAppReject;
+	private String is_app_reject;
     /**
      * 审批拒绝原因
      */
 	@TableField("app_reject_reason")
-	private String appRejectReason;
+	private String app_reject_reason;
     /**
      * 审批金额
      */
 	@TableField("approval_amt")
-	private String approvalAmt;
+	private String approval_amt;
     /**
      * 签约时间
      */
@@ -155,7 +155,7 @@ public class QueryMarketing implements Serializable {
      * 签约金额
      */
 	@TableField("sign_amt")
-	private String signAmt;
+	private String sign_amt;
     /**
      * 放款时间
      */
@@ -172,23 +172,22 @@ public class QueryMarketing implements Serializable {
      * 费率-期初服务费
      */
 	@TableField("businessrate_cut")
-	private String businessrateCut;
+	private String businessrate_cut;
     /**
      * 费率-年利率
      */
 	@TableField("businessrate_rate")
-	private String businessrateRate;
+	private String businessrate_rate;
     /**
      * 费率-月管理费
      */
 	@TableField("businessrate_fee")
-	private String businessrateFee;
+	private String businessrate_fee;
     /**
      * 费率-罚息
      */
 	@TableField("businessrate_fin")
-	private String businessrateFin;
-
+	private String businessrate_fin;
 
 	public Long getId() {
 		return id;
@@ -198,12 +197,12 @@ public class QueryMarketing implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmployeeName() {
-		return employeeName;
+	public String getEmployee_name() {
+		return employee_name;
 	}
 
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
+	public void setEmployee_name(String employee_name) {
+		this.employee_name = employee_name;
 	}
 
 	public String getIdcard() {
@@ -214,28 +213,28 @@ public class QueryMarketing implements Serializable {
 		this.idcard = idcard;
 	}
 
-	public String getMobilePhone() {
-		return mobilePhone;
+	public String getMobile_phone() {
+		return mobile_phone;
 	}
 
-	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone = mobilePhone;
+	public void setMobile_phone(String mobile_phone) {
+		this.mobile_phone = mobile_phone;
 	}
 
-	public String getEmsId() {
-		return emsId;
+	public String getEms_id() {
+		return ems_id;
 	}
 
-	public void setEmsId(String emsId) {
-		this.emsId = emsId;
+	public void setEms_id(String ems_id) {
+		this.ems_id = ems_id;
 	}
 
-	public String getEmployeeId() {
-		return employeeId;
+	public String getEmployee_id() {
+		return employee_id;
 	}
 
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
+	public void setEmployee_id(String employee_id) {
+		this.employee_id = employee_id;
 	}
 
 	public String getSex() {
@@ -254,68 +253,68 @@ public class QueryMarketing implements Serializable {
 		this.age = age;
 	}
 
-	public String getEntryDate() {
-		return entryDate;
+	public String getEntry_date() {
+		return entry_date;
 	}
 
-	public void setEntryDate(String entryDate) {
-		this.entryDate = entryDate;
+	public void setEntry_date(String entry_date) {
+		this.entry_date = entry_date;
 	}
 
-	public String getQuitDate() {
-		return quitDate;
+	public String getQuit_date() {
+		return quit_date;
 	}
 
-	public void setQuitDate(String quitDate) {
-		this.quitDate = quitDate;
+	public void setQuit_date(String quit_date) {
+		this.quit_date = quit_date;
 	}
 
-	public String getIsVip() {
-		return isVip;
+	public String getIs_vip() {
+		return is_vip;
 	}
 
-	public void setIsVip(String isVip) {
-		this.isVip = isVip;
+	public void setIs_vip(String is_vip) {
+		this.is_vip = is_vip;
 	}
 
-	public String getGrpServiceYears() {
-		return grpServiceYears;
+	public String getGrp_service_years() {
+		return grp_service_years;
 	}
 
-	public void setGrpServiceYears(String grpServiceYears) {
-		this.grpServiceYears = grpServiceYears;
+	public void setGrp_service_years(String grp_service_years) {
+		this.grp_service_years = grp_service_years;
 	}
 
-	public String getCompanyName() {
-		return companyName;
+	public String getCompany_name() {
+		return company_name;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
 	}
 
-	public String getServiceStatus() {
-		return serviceStatus;
+	public String getService_status() {
+		return service_status;
 	}
 
-	public void setServiceStatus(String serviceStatus) {
-		this.serviceStatus = serviceStatus;
+	public void setService_status(String service_status) {
+		this.service_status = service_status;
 	}
 
-	public String getSpecialTitle() {
-		return specialTitle;
+	public String getSpecial_title() {
+		return special_title;
 	}
 
-	public void setSpecialTitle(String specialTitle) {
-		this.specialTitle = specialTitle;
+	public void setSpecial_title(String special_title) {
+		this.special_title = special_title;
 	}
 
-	public String getIsSpecial() {
-		return isSpecial;
+	public String getIs_special() {
+		return is_special;
 	}
 
-	public void setIsSpecial(String isSpecial) {
-		this.isSpecial = isSpecial;
+	public void setIs_special(String is_special) {
+		this.is_special = is_special;
 	}
 
 	public String getSerialno() {
@@ -342,12 +341,12 @@ public class QueryMarketing implements Serializable {
 		this.phasename = phasename;
 	}
 
-	public BigDecimal getLoanUnfinishAmt() {
-		return loanUnfinishAmt;
+	public BigDecimal getLoan_unfinish_amt() {
+		return loan_unfinish_amt;
 	}
 
-	public void setLoanUnfinishAmt(BigDecimal loanUnfinishAmt) {
-		this.loanUnfinishAmt = loanUnfinishAmt;
+	public void setLoan_unfinish_amt(BigDecimal loan_unfinish_amt) {
+		this.loan_unfinish_amt = loan_unfinish_amt;
 	}
 
 	public String getFamilyAddress() {
@@ -366,44 +365,44 @@ public class QueryMarketing implements Serializable {
 		this.salary = salary;
 	}
 
-	public BigDecimal getApplyAmt() {
-		return applyAmt;
+	public BigDecimal getApply_amt() {
+		return apply_amt;
 	}
 
-	public void setApplyAmt(BigDecimal applyAmt) {
-		this.applyAmt = applyAmt;
+	public void setApply_amt(BigDecimal apply_amt) {
+		this.apply_amt = apply_amt;
 	}
 
-	public String getAppEndtime() {
-		return appEndtime;
+	public String getApp_endtime() {
+		return app_endtime;
 	}
 
-	public void setAppEndtime(String appEndtime) {
-		this.appEndtime = appEndtime;
+	public void setApp_endtime(String app_endtime) {
+		this.app_endtime = app_endtime;
 	}
 
-	public String getIsAppReject() {
-		return isAppReject;
+	public String getIs_app_reject() {
+		return is_app_reject;
 	}
 
-	public void setIsAppReject(String isAppReject) {
-		this.isAppReject = isAppReject;
+	public void setIs_app_reject(String is_app_reject) {
+		this.is_app_reject = is_app_reject;
 	}
 
-	public String getAppRejectReason() {
-		return appRejectReason;
+	public String getApp_reject_reason() {
+		return app_reject_reason;
 	}
 
-	public void setAppRejectReason(String appRejectReason) {
-		this.appRejectReason = appRejectReason;
+	public void setApp_reject_reason(String app_reject_reason) {
+		this.app_reject_reason = app_reject_reason;
 	}
 
-	public String getApprovalAmt() {
-		return approvalAmt;
+	public String getApproval_amt() {
+		return approval_amt;
 	}
 
-	public void setApprovalAmt(String approvalAmt) {
-		this.approvalAmt = approvalAmt;
+	public void setApproval_amt(String approval_amt) {
+		this.approval_amt = approval_amt;
 	}
 
 	public String getSigndate() {
@@ -414,12 +413,12 @@ public class QueryMarketing implements Serializable {
 		this.signdate = signdate;
 	}
 
-	public String getSignAmt() {
-		return signAmt;
+	public String getSign_amt() {
+		return sign_amt;
 	}
 
-	public void setSignAmt(String signAmt) {
-		this.signAmt = signAmt;
+	public void setSign_amt(String sign_amt) {
+		this.sign_amt = sign_amt;
 	}
 
 	public String getPutoutdate() {
@@ -446,36 +445,35 @@ public class QueryMarketing implements Serializable {
 		this.businessterm = businessterm;
 	}
 
-	public String getBusinessrateCut() {
-		return businessrateCut;
+	public String getBusinessrate_cut() {
+		return businessrate_cut;
 	}
 
-	public void setBusinessrateCut(String businessrateCut) {
-		this.businessrateCut = businessrateCut;
+	public void setBusinessrate_cut(String businessrate_cut) {
+		this.businessrate_cut = businessrate_cut;
 	}
 
-	public String getBusinessrateRate() {
-		return businessrateRate;
+	public String getBusinessrate_rate() {
+		return businessrate_rate;
 	}
 
-	public void setBusinessrateRate(String businessrateRate) {
-		this.businessrateRate = businessrateRate;
+	public void setBusinessrate_rate(String businessrate_rate) {
+		this.businessrate_rate = businessrate_rate;
 	}
 
-	public String getBusinessrateFee() {
-		return businessrateFee;
+	public String getBusinessrate_fee() {
+		return businessrate_fee;
 	}
 
-	public void setBusinessrateFee(String businessrateFee) {
-		this.businessrateFee = businessrateFee;
+	public void setBusinessrate_fee(String businessrate_fee) {
+		this.businessrate_fee = businessrate_fee;
 	}
 
-	public String getBusinessrateFin() {
-		return businessrateFin;
+	public String getBusinessrate_fin() {
+		return businessrate_fin;
 	}
 
-	public void setBusinessrateFin(String businessrateFin) {
-		this.businessrateFin = businessrateFin;
+	public void setBusinessrate_fin(String businessrate_fin) {
+		this.businessrate_fin = businessrate_fin;
 	}
-
 }
