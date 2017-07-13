@@ -10,20 +10,20 @@
 						http://www.springframework.org/schema/mvc
 						http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
-	<!--&lt;!&ndash; 加载配置文件 &ndash;&gt;-->
-	<!--<bean id="placeholder" class="com.baomidou.framework.velocity.VelocityPropertyPlaceholderConfigurer">-->
-		<!--&lt;!&ndash; 允许JVM参数覆盖 &ndash;&gt;-->
-		<!--<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>-->
-		<!--&lt;!&ndash; 忽略没有找到的资源文件 &ndash;&gt;-->
-		<!--<property name="ignoreResourceNotFound" value="true"/>-->
-		<!--&lt;!&ndash; 配置资源文件 &ndash;&gt;-->
-		<!--<property name="locations">-->
-			<!--<list>-->
-				<!--<value>classpath:properties/excelFields.properties</value>-->
+	<!-- 加载配置文件 -->
+	<bean id="placeholder" class="com.baomidou.framework.velocity.VelocityPropertyPlaceholderConfigurer">
+		<!-- 允许JVM参数覆盖 -->
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+		<!-- 忽略没有找到的资源文件 -->
+		<property name="ignoreResourceNotFound" value="true"/>
+		<!-- 配置资源文件 -->
+		<property name="locations">
+			<list>
+				<value>classpath:properties/excelFields.properties</value>
 				<!--<value>classpath:properties/sso.properties</value>-->
-			<!--</list>-->
-		<!--</property>-->
-	<!--</bean>-->
+			</list>
+		</property>
+	</bean>
 
 	<!-- 扫描 controller -->
 	<context:component-scan base-package="com.baomidou.springwind.controller" />

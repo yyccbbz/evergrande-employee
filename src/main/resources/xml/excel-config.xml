@@ -17,23 +17,23 @@
 	<excel id="employeeInfo" class="com.baomidou.springwind.entity.EmployeeInfo"
 		   sheetname="员工贷信息" defaultColumnWidth="5000" defaultAlign="center" enableStyle="true">
 		<field name="id" title="主键"/>
-		<field name="employeeName" title="姓名"/>
+		<field name="employee_name" title="姓名"/>
 		<field name="idcard" title="身份证号"/>
-		<field name="mobilePhone" title="手机号"/>
-		<field name="emsId" title="EMS号"/>
-		<field name="employeeId" title="员工编码"/>
+		<field name="mobile_phone" title="手机号"/>
+		<field name="ems_id" title="EMS号"/>
+		<field name="employee_id" title="员工编码"/>
 		<field name="sex" title="性别"/>
 		<field name="age" title="年龄"/>
-		<field name="entryDate" title="入职时间"/>
-		<field name="quitDate" title="离职时间"/>
-		<field name="serviceYears" title="服务年限"/>
-		<field name="companyName" title="公司名"/>
-		<field name="serviceStatus" title="在职状态"/>
+		<field name="entry_date" title="入职时间"/>
+		<field name="quit_date" title="离职时间"/>
+		<field name="service_years" title="服务年限"/>
+		<field name="company_name" title="公司名"/>
+		<field name="service_status" title="在职状态"/>
 		<field name="phasename" title="贷款状态"/>
-		<field name="loanUnfinishAmt" title="贷款剩余应还本金"/>
-		<field name="leaveControl" title="离职管控方式"/>
-		<field name="createTime" title="创建时间" pattern="yyyy/MM/dd HH:mm:ss"/>
-		<field name="updateTime" title="更新时间" pattern="yyyy/MM/dd HH:mm:ss"/>
+		<field name="loan_unfinish_amt" title="贷款剩余应还本金"/>
+		<field name="leave_control" title="离职管控方式"/>
+		<field name="create_time" title="创建时间" pattern="yyyy/MM/dd HH:mm:ss"/>
+		<field name="update_time" title="更新时间" pattern="yyyy/MM/dd HH:mm:ss"/>
 	</excel>
 
 </excels>

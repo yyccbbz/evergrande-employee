@@ -21,7 +21,7 @@
 			<list>
 				<value>classpath:properties/jdbc.properties</value>
 				<value>classpath:properties/httpclient.properties</value>
-				<value>classpath:properties/excelFields.properties</value>
+				<!--<value>classpath:properties/excelFields.properties</value>-->
 				<value>classpath:properties/sso.properties</value>
 			</list>
 		</property>

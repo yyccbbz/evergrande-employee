@@ -30,11 +30,11 @@ public class Test {
                 String s3 = strs[2];//类属性
 
                 String field = "{ field: '" + s2 + "', title: '" + s1 + "', sortable:'true',  align: 'center', valign: 'middle' },";
-                System.err.println(field);
+//                System.err.println(field);
 
-                String excelLine = "<field name=\""+s3+"\" title=\""+s1+"\"/>";
-//                System.err.println(excelLine);
-                sb.append(s3);
+                String excelLine = "<field name=\""+s2+"\" title=\""+s1+"\"/>";
+                System.err.println(excelLine);
+                sb.append(s2);
                 sb.append(",");
 
             }

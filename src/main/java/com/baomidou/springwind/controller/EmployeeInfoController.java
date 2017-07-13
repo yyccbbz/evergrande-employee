@@ -69,8 +69,6 @@ public class EmployeeInfoController extends BaseController {
     @Permission("5001")
     @RequestMapping("/search")
     public String search(Model model) {
-//        model.addAttribute("advisors",
-//                advisorService.selectList(new EntityWrapper<Advisor>().eq("is_valid", 1)));
         return "/employeeInfo/search";
     }
 
@@ -127,8 +125,13 @@ public class EmployeeInfoController extends BaseController {
         List<EmployeeInfo> list = JSONObject.parseArray(values.toJSONString(), EmployeeInfo.class);
         System.out.println("list = " + list);
 
+        //处理分页
+        List<EmployeeInfo> subList = null;
+        if(list != null && list.size() >0){
+            subList = list.subList((current - 1) * size, current * size - 1);
+        }
         page.setTotal(list.size());
-        page.setRecords(list);
+        page.setRecords(subList);
         return jsonPage(page);
     }
 
@@ -168,7 +171,19 @@ public class EmployeeInfoController extends BaseController {
     public ModelAndView downloadExcel() {
 
         List<String> fields = Arrays.asList(excelFields.split(","));
-        List<EmployeeInfo> beans = employeeInfoService.selectList(null);
+        String url = BASE_HTTP_URL + "&employee_name=" + "&idcard=" + "&mobile_phone=" + "&ems_id=" + "&employee_id=";
+        String dataStr = "";
+        try {
+            dataStr = httpAPIService.doGet(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JSONArray values = JSON.parseObject(dataStr, Feature.OrderedField).getJSONObject("details")
+                .getJSONObject("list").getJSONArray("values");
+        System.out.println("values = " + values);
+
+        List<EmployeeInfo> beans = JSONObject.parseArray(values.toJSONString(), EmployeeInfo.class);
+
         return super.exportExcel(excelId, beans, null, fields, excelName);
     }
 
