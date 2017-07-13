@@ -29,11 +29,11 @@ public class Test {
                 String s2 = strs[1];//表字段
                 String s3 = strs[2];//类属性
 
-                String field = "{ field: '" + s3 + "', title: '" + s1 + "', sortable:'true',  align: 'center', valign: 'middle' },";
-//                System.err.println(field);
+                String field = "{ field: '" + s2 + "', title: '" + s1 + "', sortable:'true',  align: 'center', valign: 'middle' },";
+                System.err.println(field);
 
                 String excelLine = "<field name=\""+s3+"\" title=\""+s1+"\"/>";
-                System.err.println(excelLine);
+//                System.err.println(excelLine);
                 sb.append(s3);
                 sb.append(",");
 

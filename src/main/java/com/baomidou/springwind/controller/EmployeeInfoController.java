@@ -86,7 +86,8 @@ public class EmployeeInfoController extends BaseController {
 
     /**
      * CRUD
-     * http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188&employee_name=&idcard=&mobile_phone=&ems_id=&employee_id=
+     * http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188
+     * &employee_name=&idcard=&mobile_phone=&ems_id=&employee_id=
      */
     @ResponseBody
     @Permission("5001")
@@ -95,36 +96,40 @@ public class EmployeeInfoController extends BaseController {
 
         System.err.println("筛选条件 formData =" + _search);
 
-        String day = request.getParameter("day");
-        String today = DateUtil.thisDate();
-        String str = "";
+        Page<EmployeeInfo> page = getPage();
+        int current = page.getCurrent();
+        int size = page.getSize();
 
-        if (StringUtils.isEmpty(day)) {
-            day = today;
+        EmployeeInfo info = new EmployeeInfo();
+        if (StringUtil.isNotEmpty(_search)) {
+            info = JSONObject.parseObject(_search, EmployeeInfo.class);
         }
-//http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188&employee_name=?&idcard=?&mobile_phone=?&ems_id=?&employee_id=?
-        String url = BASE_HTTP_URL + "&date=" + day;
-//            System.err.println("url =" + url);
+
+        String url = BASE_HTTP_URL + "&employee_name=" + StringUtil.getStrEmpty(info.getEmployee_name())
+                                   + "&idcard=" + StringUtil.getStrEmpty(info.getIdcard())
+                                   + "&mobile_phone=" + StringUtil.getStrEmpty(info.getMobile_phone())
+                                   + "&ems_id=" + StringUtil.getStrEmpty(info.getEms_id())
+                                   + "&employee_id=" + StringUtil.getStrEmpty(info.getEmployee_id());
+        System.err.println("url =" + url);
+
+        String dataStr = "";
         try {
-            str = httpAPIService.doGet(url);
+            dataStr = httpAPIService.doGet(url);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        JSONArray values = JSON.parseObject(str, Feature.OrderedField).getJSONObject("details")
+        System.out.println("dataStr = " + dataStr);
+
+        JSONArray values = JSON.parseObject(dataStr, Feature.OrderedField).getJSONObject("details")
                 .getJSONObject("list").getJSONArray("values");
+        System.out.println("values = " + values);
 
-//        return values.toJSONString();
+        List<EmployeeInfo> list = JSONObject.parseArray(values.toJSONString(), EmployeeInfo.class);
+        System.out.println("list = " + list);
 
-        Page<EmployeeInfo> userPage = null;
-        Page<EmployeeInfo> page = getPage();
-        if (StringUtil.isNotEmpty(_search)) {
-            EmployeeInfo employeeInfo = JSONObject.parseObject(_search, EmployeeInfo.class);
-            userPage = employeeInfoService.selectPageByParams(page, employeeInfo);
-        } else {
-            userPage = employeeInfoService.selectPage(page,
-                    new EntityWrapper<EmployeeInfo>().orderBy("quit_date", false));
-        }
-        return jsonPage(userPage);
+        page.setTotal(list.size());
+        page.setRecords(list);
+        return jsonPage(page);
     }
 
     @ResponseBody
@@ -132,15 +137,15 @@ public class EmployeeInfoController extends BaseController {
     @RequestMapping("/editUser")
     public String editUser(EmployeeInfo employee) {
         boolean rlt = false;
-        if (employee != null) {
-            if (employee.getId() != null) {
-                rlt = employeeInfoService.updateById(employee);
-            } else {
-                employee.setCreateTime(new Date());
-                employee.setUpdateTime(employee.getCreateTime());
-                rlt = employeeInfoService.insert(employee);
-            }
-        }
+//        if (employee != null) {
+//            if (employee.getId() != null) {
+//                rlt = employeeInfoService.updateById(employee);
+//            } else {
+//                employee.setCreateTime(new Date());
+//                employee.setUpdateTime(employee.getCreateTime());
+//                rlt = employeeInfoService.insert(employee);
+//            }
+//        }
         return callbackSuccess(rlt);
     }
 
@@ -172,35 +177,35 @@ public class EmployeeInfoController extends BaseController {
     @RequestMapping("addTestData")
     public String addTestData() {
         ArrayList<EmployeeInfo> list = new ArrayList<>();
-        for (int i = 1; i <= 100; i++) {
-            EmployeeInfo u = new EmployeeInfo();
-            u.setEmployeeName("张三"+i);
-            u.setIdcard(RandomStringUtils.randomNumeric(18));
-            u.setMobilePhone(RandomStringUtils.randomNumeric(11));
-            u.setEmsId(RandomStringUtils.randomNumeric(9));
-            u.setEmployeeId(RandomStringUtils.randomNumeric(10));
-            u.setSex(RandomStringUtils.random(1, new char[]{'2', '1'}));
-            u.setAge(RandomStringUtils.randomNumeric(2));
-            u.setEntryDate(DateUtil.date2Str(DateUtil.randomDate("2017-01-01", "2017-03-12"),DateUtil.DEFAULT_DATE_FORMAT));
-            u.setQuitDate(DateUtil.date2Str(DateUtil.randomDate("2017-04-01", "2017-07-12"),DateUtil.DEFAULT_DATE_FORMAT));
-            u.setServiceYears(new BigDecimal(RandomStringUtils.randomNumeric(2)));
-            u.setCompanyName("恒大子公司"+i);
-            if (i%3 ==0) {
-                u.setServiceStatus("在职");
-            } else if (i%3 ==1) {
-                u.setServiceStatus("离职");
-            } else {
-                u.setServiceStatus("试用期");
-            }
-            u.setPhasename(StringUtils.EMPTY);
-            u.setLoanUnfinishAmt(new BigDecimal(RandomStringUtils.randomNumeric(4)));
-            u.setLeaveControl(StringUtils.EMPTY);
-            u.setCreateTime(new Date());
-            u.setUpdateTime(u.getCreateTime());
-
-            list.add(u);
-            System.err.println(u);
-        }
+//        for (int i = 1; i <= 100; i++) {
+//            EmployeeInfo u = new EmployeeInfo();
+//            u.setEmployeeName("张三"+i);
+//            u.setIdcard(RandomStringUtils.randomNumeric(18));
+//            u.setMobilePhone(RandomStringUtils.randomNumeric(11));
+//            u.setEmsId(RandomStringUtils.randomNumeric(9));
+//            u.setEmployeeId(RandomStringUtils.randomNumeric(10));
+//            u.setSex(RandomStringUtils.random(1, new char[]{'2', '1'}));
+//            u.setAge(RandomStringUtils.randomNumeric(2));
+//            u.setEntryDate(DateUtil.date2Str(DateUtil.randomDate("2017-01-01", "2017-03-12"),DateUtil.DEFAULT_DATE_FORMAT));
+//            u.setQuitDate(DateUtil.date2Str(DateUtil.randomDate("2017-04-01", "2017-07-12"),DateUtil.DEFAULT_DATE_FORMAT));
+//            u.setServiceYears(new BigDecimal(RandomStringUtils.randomNumeric(2)));
+//            u.setCompanyName("恒大子公司"+i);
+//            if (i%3 ==0) {
+//                u.setServiceStatus("在职");
+//            } else if (i%3 ==1) {
+//                u.setServiceStatus("离职");
+//            } else {
+//                u.setServiceStatus("试用期");
+//            }
+//            u.setPhasename(StringUtils.EMPTY);
+//            u.setLoanUnfinishAmt(new BigDecimal(RandomStringUtils.randomNumeric(4)));
+//            u.setLeaveControl(StringUtils.EMPTY);
+//            u.setCreateTime(new Date());
+//            u.setUpdateTime(u.getCreateTime());
+//
+//            list.add(u);
+//            System.err.println(u);
+//        }
         Boolean b = employeeInfoService.insertBatch(list);
         return b.toString();
     }

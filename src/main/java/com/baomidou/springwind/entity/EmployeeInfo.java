@@ -30,7 +30,7 @@ public class EmployeeInfo implements Serializable {
      * 姓名
      */
 	@TableField("employee_name")
-	private String employeeName;
+	private String employee_name;
     /**
      * 身份证号
      */
@@ -39,17 +39,17 @@ public class EmployeeInfo implements Serializable {
      * 手机号
      */
 	@TableField("mobile_phone")
-	private String mobilePhone;
+	private String mobile_phone;
     /**
      * EMS号
      */
 	@TableField("ems_id")
-	private String emsId;
+	private String ems_id;
     /**
      * 员工编码
      */
 	@TableField("employee_id")
-	private String employeeId;
+	private String employee_id;
     /**
      * 性别
      */
@@ -62,27 +62,27 @@ public class EmployeeInfo implements Serializable {
      * 入职时间
      */
 	@TableField("entry_date")
-	private String entryDate;
+	private String entry_date;
     /**
      * 离职时间
      */
 	@TableField("quit_date")
-	private String quitDate;
+	private String quit_date;
     /**
      * 服务年限
      */
 	@TableField("service_years")
-	private BigDecimal serviceYears;
+	private BigDecimal service_years;
     /**
      * 公司名
      */
 	@TableField("company_name")
-	private String companyName;
+	private String company_name;
     /**
      * 在职状态
      */
 	@TableField("service_status")
-	private String serviceStatus;
+	private String service_status;
     /**
      * 贷款状态
      */
@@ -91,22 +91,22 @@ public class EmployeeInfo implements Serializable {
      * 贷款剩余应还本金
      */
 	@TableField("loan_unfinish_amt")
-	private BigDecimal loanUnfinishAmt;
+	private BigDecimal loan_unfinish_amt;
     /**
      * 离职管控方式
      */
 	@TableField("leave_control")
-	private String leaveControl;
+	private String leave_control;
     /**
      * 创建时间
      */
 	@TableField("create_time")
-	private Date createTime;
+	private Date create_time;
     /**
      * 更新时间
      */
 	@TableField("update_time")
-	private Date updateTime;
+	private Date update_time;
 
 
 	public Long getId() {
@@ -117,12 +117,12 @@ public class EmployeeInfo implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmployeeName() {
-		return employeeName;
+	public String getEmployee_name() {
+		return employee_name;
 	}
 
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
+	public void setEmployee_name(String employee_name) {
+		this.employee_name = employee_name;
 	}
 
 	public String getIdcard() {
@@ -133,28 +133,28 @@ public class EmployeeInfo implements Serializable {
 		this.idcard = idcard;
 	}
 
-	public String getMobilePhone() {
-		return mobilePhone;
+	public String getMobile_phone() {
+		return mobile_phone;
 	}
 
-	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone = mobilePhone;
+	public void setMobile_phone(String mobile_phone) {
+		this.mobile_phone = mobile_phone;
 	}
 
-	public String getEmsId() {
-		return emsId;
+	public String getEms_id() {
+		return ems_id;
 	}
 
-	public void setEmsId(String emsId) {
-		this.emsId = emsId;
+	public void setEms_id(String ems_id) {
+		this.ems_id = ems_id;
 	}
 
-	public String getEmployeeId() {
-		return employeeId;
+	public String getEmployee_id() {
+		return employee_id;
 	}
 
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
+	public void setEmployee_id(String employee_id) {
+		this.employee_id = employee_id;
 	}
 
 	public String getSex() {
@@ -173,44 +173,44 @@ public class EmployeeInfo implements Serializable {
 		this.age = age;
 	}
 
-	public String getEntryDate() {
-		return entryDate;
+	public String getEntry_date() {
+		return entry_date;
 	}
 
-	public void setEntryDate(String entryDate) {
-		this.entryDate = entryDate;
+	public void setEntry_date(String entry_date) {
+		this.entry_date = entry_date;
 	}
 
-	public String getQuitDate() {
-		return quitDate;
+	public String getQuit_date() {
+		return quit_date;
 	}
 
-	public void setQuitDate(String quitDate) {
-		this.quitDate = quitDate;
+	public void setQuit_date(String quit_date) {
+		this.quit_date = quit_date;
 	}
 
-	public BigDecimal getServiceYears() {
-		return serviceYears;
+	public BigDecimal getService_years() {
+		return service_years;
 	}
 
-	public void setServiceYears(BigDecimal serviceYears) {
-		this.serviceYears = serviceYears;
+	public void setService_years(BigDecimal service_years) {
+		this.service_years = service_years;
 	}
 
-	public String getCompanyName() {
-		return companyName;
+	public String getCompany_name() {
+		return company_name;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
 	}
 
-	public String getServiceStatus() {
-		return serviceStatus;
+	public String getService_status() {
+		return service_status;
 	}
 
-	public void setServiceStatus(String serviceStatus) {
-		this.serviceStatus = serviceStatus;
+	public void setService_status(String service_status) {
+		this.service_status = service_status;
 	}
 
 	public String getPhasename() {
@@ -221,36 +221,35 @@ public class EmployeeInfo implements Serializable {
 		this.phasename = phasename;
 	}
 
-	public BigDecimal getLoanUnfinishAmt() {
-		return loanUnfinishAmt;
+	public BigDecimal getLoan_unfinish_amt() {
+		return loan_unfinish_amt;
 	}
 
-	public void setLoanUnfinishAmt(BigDecimal loanUnfinishAmt) {
-		this.loanUnfinishAmt = loanUnfinishAmt;
+	public void setLoan_unfinish_amt(BigDecimal loan_unfinish_amt) {
+		this.loan_unfinish_amt = loan_unfinish_amt;
 	}
 
-	public String getLeaveControl() {
-		return leaveControl;
+	public String getLeave_control() {
+		return leave_control;
 	}
 
-	public void setLeaveControl(String leaveControl) {
-		this.leaveControl = leaveControl;
+	public void setLeave_control(String leave_control) {
+		this.leave_control = leave_control;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
+	public Date getCreate_time() {
+		return create_time;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
 	}
 
-	public Date getUpdateTime() {
-		return updateTime;
+	public Date getUpdate_time() {
+		return update_time;
 	}
 
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
+	public void setUpdate_time(Date update_time) {
+		this.update_time = update_time;
 	}
-
 }
