@@ -11,7 +11,7 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
 
-        File file = new File("E:\\Workspace\\intellij2017\\evergrande-employee\\src\\test\\java\\test\\employee.txt");
+        File file = new File("E:\\Workspace\\intellij2017\\evergrande-employee\\src\\test\\java\\test\\marketing.txt");
 //        File file = new File("E:\\Users\\IdeaProjects\\SpringWind\\src\\test\\java\\test\\getSalesDetails.txt");
 //        File file = new File("D:\\ideaworkspace\\SpringWind\\src\\test\\java\\test\\advisor.txt");
 
@@ -25,16 +25,16 @@ public class Test {
 
             while ((lineTxt = bufferedReader.readLine()) != null) {
                 String[] strs = lineTxt.split(",");
-                String s1 = strs[0];//中文
-                String s2 = strs[1];//表字段
-                String s3 = strs[2];//类属性
+                String s1 = strs[0];//表字段
+                String s2 = strs[1];//中文
+//                String s3 = strs[2];//类属性
 
-                String field = "{ field: '" + s2 + "', title: '" + s1 + "', sortable:'true',  align: 'center', valign: 'middle' },";
+                String field = "{ field: '" + s1 + "', title: '" + s2 + "', sortable:'true',  align: 'center', valign: 'middle' },";
 //                System.err.println(field);
 
-                String excelLine = "<field name=\""+s2+"\" title=\""+s1+"\"/>";
+                String excelLine = "<field name=\""+s1+"\" title=\""+s2+"\"/>";
                 System.err.println(excelLine);
-                sb.append(s2);
+                sb.append(s1);
                 sb.append(",");
 
             }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baomidou.springwind.mapper.QueryMarketingMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.QueryMarketing">
+		<id column="id" property="id" />
+		<result column="employee_name" property="employeeName" />
+		<result column="idcard" property="idcard" />
+		<result column="mobile_phone" property="mobilePhone" />
+		<result column="ems_id" property="emsId" />
+		<result column="employee_id" property="employeeId" />
+		<result column="sex" property="sex" />
+		<result column="age" property="age" />
+		<result column="entry_date" property="entryDate" />
+		<result column="quit_date" property="quitDate" />
+		<result column="is_vip" property="isVip" />
+		<result column="grp_service_years" property="grpServiceYears" />
+		<result column="company_name" property="companyName" />
+		<result column="service_status" property="serviceStatus" />
+		<result column="special_title" property="specialTitle" />
+		<result column="is_special" property="isSpecial" />
+		<result column="serialno" property="serialno" />
+		<result column="inputtime" property="inputtime" />
+		<result column="phasename" property="phasename" />
+		<result column="loan_unfinish_amt" property="loanUnfinishAmt" />
+		<result column="familyAddress" property="familyAddress" />
+		<result column="salary" property="salary" />
+		<result column="apply_amt" property="applyAmt" />
+		<result column="app_endtime" property="appEndtime" />
+		<result column="is_app_reject" property="isAppReject" />
+		<result column="app_reject_reason" property="appRejectReason" />
+		<result column="approval_amt" property="approvalAmt" />
+		<result column="signdate" property="signdate" />
+		<result column="sign_amt" property="signAmt" />
+		<result column="putoutdate" property="putoutdate" />
+		<result column="putoutamt" property="putoutamt" />
+		<result column="businessterm" property="businessterm" />
+		<result column="businessrate_cut" property="businessrateCut" />
+		<result column="businessrate_rate" property="businessrateRate" />
+		<result column="businessrate_fee" property="businessrateFee" />
+		<result column="businessrate_fin" property="businessrateFin" />
+	</resultMap>
+
+</mapper>
