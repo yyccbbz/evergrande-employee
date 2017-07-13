@@ -88,7 +88,9 @@ public class EmployeeInfoController extends BaseController {
                     .getJSONObject("list").getJSONArray("values");
             System.out.println("values = " + values);
 
-//TODO
+            //TODO
+            EmployeeInfo e = values.toJavaObject(EmployeeInfo.class);
+
             EmployeeInfo info = (EmployeeInfo) JSONObject.parse(values.toString());
             model.addAttribute("user", info);
         }
