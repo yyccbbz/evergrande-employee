@@ -5,15 +5,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
 import com.baomidou.kisso.annotation.Permission;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.springwind.common.utils.DateUtil;
 import com.baomidou.springwind.common.utils.StringUtil;
 import com.baomidou.springwind.entity.EmployeeInfo;
 import com.baomidou.springwind.service.IEmployeeInfoService;
 import com.baomidou.springwind.service.support.HttpAPIService;
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,10 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -89,9 +84,19 @@ public class EmployeeInfoController extends BaseController {
             System.out.println("values = " + values);
 
             //TODO
-            EmployeeInfo e = values.toJavaObject(EmployeeInfo.class);
+            Object o = values.get(0);
+            System.out.println("o = " + o);
 
-            EmployeeInfo info = (EmployeeInfo) JSONObject.parse(values.toString());
+            EmployeeInfo info = (EmployeeInfo) JSONObject.parse(values.get(0).toString());
+
+//            EmployeeInfo info = null;
+//            Iterator<Object> it = values.iterator();
+//            while(it.hasNext()){
+//                JSONObject value = (JSONObject) it.next();
+//                System.out.println("value = " + value.toString());
+//                info = (EmployeeInfo) JSONObject.parse(value.toString());
+//            }
+
             model.addAttribute("user", info);
         }
         return "/employeeInfo/edit";

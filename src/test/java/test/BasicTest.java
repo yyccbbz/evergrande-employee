@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSONArray;
 public class BasicTest {
 
     public static void main(String[] args) {
-//        JSONArray values = "[
+//        JSONArray values = [
 //        {
 //            "employee_name": "虞舒雅",
 //                "idcard": "440507198811070628",
@@ -29,9 +29,9 @@ public class BasicTest {
 //                "service_status": "正式员工",
 //                "phasename": "已批准",
 //                "loan_unfinish_amt": 0,
-//                "leave_control": "暂停办理离职手续，请与互金集团接口人XXX联系，并提醒员工结清贷款，再行办理离职手续可办理离职手续；（适用于有在贷中、已审批未放款、申请中等状态员工贷的员工）"
+//                "leave_control": "暂停办理离职手续"
 //        }
-//    ]";
+//    ];
 
 
     }
