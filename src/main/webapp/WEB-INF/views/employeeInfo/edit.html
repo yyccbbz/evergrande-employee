@@ -90,6 +90,20 @@
 
        <div class="form-group"><label class="col-sm-2 control-label">入职时间</label>
            <div class="col-sm-10">
+               <input type="text" class="form-control" value="$!{user.entry_date}" name="entry_date" readonly/>
+           </div>
+       </div>
+       <div class="hr-line-dashed"></div>
+
+       <div class="form-group"><label class="col-sm-2 control-label">离职时间</label>
+           <div class="col-sm-10">
+               <input type="text" class="form-control" value="$!{user.quit_date}" name="quit_date" placeholder="日期格式：yyyy-MM-dd"/>
+           </div>
+       </div>
+       <div class="hr-line-dashed"></div>
+
+       <!--<div class="form-group"><label class="col-sm-2 control-label">入职时间</label>
+           <div class="col-sm-10">
                <input type="text" class="form-control calendarBox" name="entry_date" id="entry_date" readonly>
                <div class="glyphicon glyphicon-calendar"></div>
            </div>
@@ -102,7 +116,7 @@
                <div class="glyphicon glyphicon-calendar"></div>
            </div>
        </div>
-       <div class="hr-line-dashed"></div>
+       <div class="hr-line-dashed"></div>-->
 
        <div class="form-group"><label class="col-sm-2 control-label">服务年限</label>
            <div class="col-sm-10">
@@ -172,6 +186,41 @@
     calendarWithTime("#entry_date");
     calendarWithTime("#quit_date");
 
+    /*数据回显*/
+    //日期回显
+    // var r = dateFtt("yyyy-MM-dd","$!{user.reportDate}");
+    //    $("#entry_date").val(formatDateTime("$!{user.reportDate}"));
+    //    $("#quit_date").val(formatDateTime("$!{user.registerTime}"));
+
+    // Radio回显
+    /*$("input[type=radio][name=isVipuser]").each(function () {
+     if ($(this).val() == '$!{user.isVipuser}') {
+     $(this).attr("checked", "checked");
+     }
+     });
+     $("input[type=radio][name=userMark]").each(function () {
+     if ($(this).val() == '$!{user.userMark}') {
+     $(this).attr("checked", "checked");
+     }
+     });
+     $("input[type=radio][name=isPerformancePool]").each(function () {
+     if ($(this).val() == '$!{user.isPerformancePool}') {
+     $(this).attr("checked", "checked");
+     }
+     });*/
+
+    //select回显
+    $("#sex option").each(function() {
+        if ($(this).val() == '${user.sex}') {
+            $(this).attr("selected", "selected");
+        }
+    });
+    $("#service_status option").each(function() {
+        if ($(this).val() == '${user.service_status}') {
+            $(this).attr("selected", "selected");
+        }
+    });
+
     $("#myForm").validator({
         valid: function (form) {
             var me = this;
@@ -194,36 +243,6 @@
                     }
                 }
             });
-        }
-    });
-
-    /*数据回显*/
-    //日期回显
-    // var r = dateFtt("yyyy-MM-dd","$!{user.reportDate}");
-    $("#entry_date").val(formatDateTime("$!{user.reportDate}"));
-    $("#quit_date").val(formatDateTime("$!{user.registerTime}"));
-
-    // Radio回显
-    /*$("input[type=radio][name=isVipuser]").each(function () {
-        if ($(this).val() == '$!{user.isVipuser}') {
-            $(this).attr("checked", "checked");
-        }
-    });
-    $("input[type=radio][name=userMark]").each(function () {
-        if ($(this).val() == '$!{user.userMark}') {
-            $(this).attr("checked", "checked");
-        }
-    });
-    $("input[type=radio][name=isPerformancePool]").each(function () {
-        if ($(this).val() == '$!{user.isPerformancePool}') {
-            $(this).attr("checked", "checked");
-        }
-    });*/
-
-    //select回显
-    $("#sex option").each(function() {
-        if ($(this).val() == '${user.userType}') {
-            $(this).attr("selected", "selected");
         }
     });
 
