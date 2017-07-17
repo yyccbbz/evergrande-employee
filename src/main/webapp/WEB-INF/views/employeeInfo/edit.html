@@ -25,45 +25,45 @@
 
        <div class="form-group"><label class="col-sm-2 control-label">姓名</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control" value="$!{user.employeeName}" name="employeeName" data-rule="姓名:required;employeeName"/>
+               <input type="text" class="form-control" value="$!{user.employee_name}" name="employee_name" readonly/>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
        <div class="form-group"><label class="col-sm-2 control-label">身份证号</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control" value="$!{user.idcard}" name="idcard" data-rule="身份证号:required;idcard"/>
+               <input type="text" class="form-control" value="$!{user.idcard}" name="idcard" readonly/>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
        <div class="form-group"><label class="col-sm-2 control-label">手机号</label>
            <div class="col-sm-10">
-           		<input type="text" class="form-control" value="$!{user.mobilePhone}" name="mobilePhone" data-rule="手机号:required;mobilePhone"/>
+           		<input type="text" class="form-control" value="$!{user.mobile_phone}" name="mobile_phone" readonly/>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
        <div class="form-group"><label class="col-sm-2 control-label">EMS号</label>
            <div class="col-sm-10">
-           		<input type="text" class="form-control" value="$!{user.emsId}" name="emsId" data-rule="EMS号:required;emsId"/>
+           		<input type="text" class="form-control" value="$!{user.ems_id}" name="ems_id" readonly/>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
        <div class="form-group"><label class="col-sm-2 control-label">员工编号</label>
            <div class="col-sm-10">
-           		<input type="text" class="form-control" value="$!{user.employeeId}" name="employeeId" data-rule="员工编号:required;employeeId"/>
+           		<input type="text" class="form-control" value="$!{user.employee_id}" name="employee_id" readonly/>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
        <div class="form-group"><label class="col-sm-2 control-label">性别</label>
            <div class="col-sm-10">
-               <select class="form-control m-b" id="sex" name="sex">
+               <select class="form-control m-b" id="sex" name="sex" readonly>
                    <option value="">请选择</option>
-                   <option value="1">男</option>
-                   <option value="2">女</option>
+                   <option value="M">男</option>
+                   <option value="F">女</option>
                </select>
            </div>
        </div>
@@ -81,22 +81,16 @@
        </div>
        <div class="hr-line-dashed"></div>-->
 
-       <!--#id,employeeName,idcard,mobilePhone,emsId,
-        employeeId,sex,age,
-        entryDate,quitDate,serviceYears,
-        companyName,serviceStatus,phasename,loanUnfinishAmt,
-        leaveControl,createTime,updateTime-->
-
        <div class="form-group"><label class="col-sm-2 control-label">年龄</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control" value="$!{user.age}" name="age" data-rule="年龄:required;age"/>
+               <input type="text" class="form-control" value="$!{user.age}" name="age" readonly/>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
        <div class="form-group"><label class="col-sm-2 control-label">入职时间</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control calendarBox" name="entryDate" id="entryDate">
+               <input type="text" class="form-control calendarBox" name="entry_date" id="entry_date" readonly>
                <div class="glyphicon glyphicon-calendar"></div>
            </div>
        </div>
@@ -104,7 +98,7 @@
 
        <div class="form-group"><label class="col-sm-2 control-label">离职时间</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control calendarBox" id="quitDate" name="quitDate">
+               <input type="text" class="form-control calendarBox" id="quit_date" name="quit_date">
                <div class="glyphicon glyphicon-calendar"></div>
            </div>
        </div>
@@ -112,18 +106,50 @@
 
        <div class="form-group"><label class="col-sm-2 control-label">服务年限</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control" name="serviceYears" value="$!{user.serviceYears}">
+               <input type="text" class="form-control" name="service_years" value="$!{user.service_years}" readonly>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
        <div class="form-group"><label class="col-sm-2 control-label">公司名</label>
            <div class="col-sm-10">
-               <input type="text" class="form-control" name="companyName" value="$!{user.companyName}">
+               <input type="text" class="form-control" name="company_name" value="$!{user.company_name}" readonly>
            </div>
        </div>
        <div class="hr-line-dashed"></div>
 
+       <div class="form-group"><label class="col-sm-2 control-label">在职状态</label>
+           <div class="col-sm-10">
+               <select class="form-control m-b" id="service_status" name="service_status">
+                   <option value="">请选择</option>
+                   <option value="在职">在职</option>
+                   <option value="已离职">已离职</option>
+                   <option value="已申请离职">已申请离职</option>
+               </select>
+           </div>
+       </div>
+       <div class="hr-line-dashed"></div>
+
+       <div class="form-group"><label class="col-sm-2 control-label">贷款状态</label>
+           <div class="col-sm-10">
+               <input type="text" class="form-control" name="phasename" value="$!{user.phasename}" readonly>
+           </div>
+       </div>
+       <div class="hr-line-dashed"></div>
+
+        <div class="form-group"><label class="col-sm-2 control-label">贷款剩余应还本金</label>
+           <div class="col-sm-10">
+               <input type="text" class="form-control" name="loan_unfinish_amt" value="$!{user.loan_unfinish_amt}" readonly>
+           </div>
+       </div>
+       <div class="hr-line-dashed"></div>
+
+       <div class="form-group"><label class="col-sm-2 control-label">离职管控方式</label>
+           <div class="col-sm-10">
+               <input type="text" class="form-control" name="leave_control" value="$!{user.leave_control}" readonly>
+           </div>
+       </div>
+       <div class="hr-line-dashed"></div>
 
        <div class="form-group">
            <div class="text-center">
@@ -143,9 +169,8 @@
 <script type="text/javascript">
 
     // 加载日期插件
-    calendarWithTime("#reportDate");
-    calendarWithTime("#registerTime");
-    calendarWithTime("#vipDate");
+    calendarWithTime("#entry_date");
+    calendarWithTime("#quit_date");
 
     $("#myForm").validator({
         valid: function (form) {
@@ -153,7 +178,7 @@
             // 提交表单之前，hold住表单，防止重复提交
             me.holdSubmit();
             $.ajax({
-                url: "#springUrl('/clientList/finalUser/editUser')",
+                url: "#springUrl('/employeeInfo/editUser')",
                 data: $(form).serialize(),
                 type: "POST",
                 success: function (data) {
@@ -175,12 +200,11 @@
     /*数据回显*/
     //日期回显
     // var r = dateFtt("yyyy-MM-dd","$!{user.reportDate}");
-    $("#reportDate").val(formatDateTime("$!{user.reportDate}"));
-    $("#registerTime").val(formatDateTime("$!{user.registerTime}"));
-    $("#vipDate").val(formatDateTime("$!{user.vipDate}"));
+    $("#entry_date").val(formatDateTime("$!{user.reportDate}"));
+    $("#quit_date").val(formatDateTime("$!{user.registerTime}"));
 
     // Radio回显
-    $("input[type=radio][name=isVipuser]").each(function () {
+    /*$("input[type=radio][name=isVipuser]").each(function () {
         if ($(this).val() == '$!{user.isVipuser}') {
             $(this).attr("checked", "checked");
         }
@@ -194,10 +218,10 @@
         if ($(this).val() == '$!{user.isPerformancePool}') {
             $(this).attr("checked", "checked");
         }
-    });
+    });*/
 
     //select回显
-    $("#userType option").each(function() {
+    $("#sex option").each(function() {
         if ($(this).val() == '${user.userType}') {
             $(this).attr("selected", "selected");
         }

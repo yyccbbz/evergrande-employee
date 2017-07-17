@@ -81,21 +81,9 @@ public class EmployeeInfoController extends BaseController {
             }
             JSONArray values = JSON.parseObject(dataStr, Feature.OrderedField).getJSONObject("details")
                     .getJSONObject("list").getJSONArray("values");
-            System.out.println("values = " + values);
+//            System.out.println("values = " + values);
 
-            //TODO
-            Object o = values.get(0);
-            System.out.println("o = " + o);
-
-            EmployeeInfo info = (EmployeeInfo) JSONObject.parse(values.get(0).toString());
-
-//            EmployeeInfo info = null;
-//            Iterator<Object> it = values.iterator();
-//            while(it.hasNext()){
-//                JSONObject value = (JSONObject) it.next();
-//                System.out.println("value = " + value.toString());
-//                info = (EmployeeInfo) JSONObject.parse(value.toString());
-//            }
+            EmployeeInfo info = JSONObject.parseObject(values.get(0).toString(),EmployeeInfo.class);
 
             model.addAttribute("user", info);
         }
