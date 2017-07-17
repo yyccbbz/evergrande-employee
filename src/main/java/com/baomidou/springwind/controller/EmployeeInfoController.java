@@ -4,10 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
+import com.baomidou.framework.upload.UploadFile;
+import com.baomidou.framework.upload.UploadMsg;
+import com.baomidou.framework.upload.UploadMultipartRequest;
 import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.common.utils.StringUtil;
 import com.baomidou.springwind.entity.EmployeeInfo;
+import com.baomidou.springwind.excel.result.ExcelImportResult;
 import com.baomidou.springwind.service.IEmployeeInfoService;
 import com.baomidou.springwind.service.support.HttpAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +21,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * <p>
@@ -35,6 +38,8 @@ import java.util.List;
 public class EmployeeInfoController extends BaseController {
 
     private final String BASE_HTTP_URL = "http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188";
+
+    private final static int MAX_POST_SIZE = 30 * 1024 * 1024;
 
     @Autowired
     private HttpAPIService httpAPIService;
@@ -149,15 +154,11 @@ public class EmployeeInfoController extends BaseController {
     @RequestMapping("/editUser")
     public String editUser(EmployeeInfo employee) {
         boolean rlt = false;
-//        if (employee != null) {
-//            if (employee.getId() != null) {
-//                rlt = employeeInfoService.updateById(employee);
-//            } else {
-//                employee.setCreateTime(new Date());
-//                employee.setUpdateTime(employee.getCreateTime());
-//                rlt = employeeInfoService.insert(employee);
-//            }
-//        }
+        if (employee != null) {
+            employee.setCreate_time(new Date());
+            employee.setUpdate_time(employee.getCreate_time());
+            rlt = employeeInfoService.insert(employee);
+        }
         return callbackSuccess(rlt);
     }
 
@@ -179,6 +180,26 @@ public class EmployeeInfoController extends BaseController {
     @RequestMapping(value = "/downloadExcel", method = RequestMethod.POST)
     public ModelAndView downloadExcel() {
 
+        String flag = request.getParameter("flag");
+        if (StringUtil.isNotEmpty(flag) && flag.equals("0")) {
+
+            String excelFields = "employee_name,idcard,mobile_phone,ems_id,employee_id,entry_date,quit_date,company_name,service_status";
+            List<String> fields = Arrays.asList(excelFields.split(","));
+            List<EmployeeInfo> beans = new ArrayList<>();
+            EmployeeInfo e = new EmployeeInfo();
+            e.setEmployee_name("必填");
+            e.setIdcard("必填");
+            e.setMobile_phone("选填");
+            e.setEms_id("选填");
+            e.setEmployee_id("选填");
+            e.setEntry_date("选填");
+            e.setQuit_date("必填");
+            e.setCompany_name("选填");
+            e.setService_status("已离职或已申请离职");
+            beans.add(e);
+            return super.exportExcel(excelId, beans, null, fields, "模板");
+        }
+
         List<String> fields = Arrays.asList(excelFields.split(","));
         String url = BASE_HTTP_URL + "&employee_name=" + "&idcard=" + "&mobile_phone=" + "&ems_id=" + "&employee_id=";
         String dataStr = "";
@@ -196,40 +217,69 @@ public class EmployeeInfoController extends BaseController {
         return super.exportExcel(excelId, beans, null, fields, excelName);
     }
 
+    /**
+     * Excel导入
+     */
+    @ResponseBody
+    @Permission("5003")
+    @RequestMapping(value = "/uploadExcel", method = RequestMethod.POST)
+    public UploadMsg uploadExcelFile() {
+
+//        assignReportImportUserService.deleteAll();
+
+        UploadMsg msg = new UploadMsg();
+        try {
+            UploadMultipartRequest umr = new UploadMultipartRequest(request, getSaveDir(), MAX_POST_SIZE);
+            umr.setFileHeaderExts("504b03.xlsx");
+            umr.upload();
+            Enumeration<?> files = umr.getFileNames();
+            while (files.hasMoreElements()) {
+                String name = (String) files.nextElement();
+                UploadFile cf = umr.getUploadFile(name);
+                if (cf != null) {
+                    /**
+                     * 上传成功
+                     */
+                    if (cf.isSuccess()) {
+                        msg.setSuccess(true);
+                        msg.setUrl(cf.getFileUrl());
+                        msg.setSize(cf.getSize());
+                        System.err.println("上传文件地址：" + msg.getUrl());
+                        System.err.println("UploadFile cf：" + cf.toString());
+                    }
+                    msg.setMsg(cf.getUploadCode().desc());
+                    /**读取Excel内容，进行写表*/
+//                    Excel excel = new Excel();
+//                    excel.setExcelName(cf.getOriginalFileName());
+//                    excel.setExcelRealName(cf.getFilesystemName());
+//                    excel.setExcelRealPath(cf.getFileUrl());
+//                    excel.setUid(0L);
+//                    excel.setCreateTime(new Date());
+//                    excelService.insert(excel);
+
+                    FileInputStream excelStream = new FileInputStream(cf.getFileUrl());
+                    ExcelImportResult readExcel = excelContext.readExcel(excelId, excelStream);
+                    List<EmployeeInfo> listBean = readExcel.getListBean();
+
+                    employeeInfoService.insertBatch(listBean);
+                }
+            }
+        } catch (IOException e) {
+            logger.error("uploadFile error. ", e);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("msg = " + toJson(msg));
+        return msg;
+
+    }
+
+
     @ResponseBody
     @Permission("5001")
     @RequestMapping("addTestData")
     public String addTestData() {
         ArrayList<EmployeeInfo> list = new ArrayList<>();
-//        for (int i = 1; i <= 100; i++) {
-//            EmployeeInfo u = new EmployeeInfo();
-//            u.setEmployeeName("张三"+i);
-//            u.setIdcard(RandomStringUtils.randomNumeric(18));
-//            u.setMobilePhone(RandomStringUtils.randomNumeric(11));
-//            u.setEmsId(RandomStringUtils.randomNumeric(9));
-//            u.setEmployeeId(RandomStringUtils.randomNumeric(10));
-//            u.setSex(RandomStringUtils.random(1, new char[]{'2', '1'}));
-//            u.setAge(RandomStringUtils.randomNumeric(2));
-//            u.setEntryDate(DateUtil.date2Str(DateUtil.randomDate("2017-01-01", "2017-03-12"),DateUtil.DEFAULT_DATE_FORMAT));
-//            u.setQuitDate(DateUtil.date2Str(DateUtil.randomDate("2017-04-01", "2017-07-12"),DateUtil.DEFAULT_DATE_FORMAT));
-//            u.setServiceYears(new BigDecimal(RandomStringUtils.randomNumeric(2)));
-//            u.setCompanyName("恒大子公司"+i);
-//            if (i%3 ==0) {
-//                u.setServiceStatus("在职");
-//            } else if (i%3 ==1) {
-//                u.setServiceStatus("离职");
-//            } else {
-//                u.setServiceStatus("试用期");
-//            }
-//            u.setPhasename(StringUtils.EMPTY);
-//            u.setLoanUnfinishAmt(new BigDecimal(RandomStringUtils.randomNumeric(4)));
-//            u.setLeaveControl(StringUtils.EMPTY);
-//            u.setCreateTime(new Date());
-//            u.setUpdateTime(u.getCreateTime());
-//
-//            list.add(u);
-//            System.err.println(u);
-//        }
         Boolean b = employeeInfoService.insertBatch(list);
         return b.toString();
     }

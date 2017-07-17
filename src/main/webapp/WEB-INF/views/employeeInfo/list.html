@@ -15,22 +15,28 @@ BigClient - 员工贷信息
 		</button>
 
 		<button class="btn btn-primary" onclick="downloadExcel()" type="button">
-			<i class="fa fa-download"></i>&nbsp;导出名单
+			<i class="fa fa-download"></i>&nbsp;下载名单
 		</button>
+
+		<button class="btn btn-primary" onclick="downloadExcel(0)" type="button">
+			<i class="fa fa-download"></i>&nbsp;下载模板
+		</button>
+
+		<button class="btn btn-primary" onclick="uploadExcel()" type="button">
+			<i class="fa fa-upload"></i>&nbsp;上传EXCEL文件</button>
+		<input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>
 
 		<!-- 此处按钮级别权限控制，目前只有 admin 拥有该权限！ -->
 		#if ($SSOPermission.isActionable("10010"))
-		<button class="btn btn-primary" onclick="editUser(null)" type="button">
+
+		<!--<button class="btn btn-primary" onclick="editUser(null)" type="button">
 			<i class="fa fa-user-plus"></i>&nbsp;添加用户
 		</button>
 
 		<button class="btn btn-primary" onclick="addTestData()" type="button">
 			<i class="fa fa-database"></i>&nbsp;添加测试数据
-		</button>
+		</button>-->
 
-		<!--<button class="btn btn-primary" onclick="uploadExcel()" type="button">-->
-		<!--<i class="fa fa-pencil"></i>&nbsp;导入EXCEL文件</button>-->
-		<!--<input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>-->
 		#end
 	</div>
 </div>
@@ -134,16 +140,16 @@ BigClient - 员工贷信息
     }
 
 	/**导出Excel*/
-	function downloadExcel() {
+	function downloadExcel(flag) {
         // 模拟Ajax获取
         downLoadFile({
             url: "#springUrl('/employeeInfo/downloadExcel.html')", //请求的url
-            data: {search: $("#txt_search").val()}				//要发送的数据
+            data: {search: $("#txt_search").val() ,flag: flag}	   //要发送的数据
         });
     }
 
     /**导入excel*/
-    function uploadExcel() {
+    function uploadExcel(flag) {
         // 触发input的点击事件，弹出文件选择窗口
         $("#fileExcel").click();
         // 选择文件后，触发
