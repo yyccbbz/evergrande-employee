@@ -210,7 +210,7 @@ public class EmployeeInfoController extends BaseController {
         }
         JSONArray values = JSON.parseObject(dataStr, Feature.OrderedField).getJSONObject("details")
                 .getJSONObject("list").getJSONArray("values");
-        System.out.println("values = " + values);
+        System.err.println("values = " + values);
 
         List<EmployeeInfo> beans = JSONObject.parseArray(values.toJSONString(), EmployeeInfo.class);
 
@@ -244,8 +244,6 @@ public class EmployeeInfoController extends BaseController {
                         msg.setSuccess(true);
                         msg.setUrl(cf.getFileUrl());
                         msg.setSize(cf.getSize());
-                        System.err.println("上传文件地址：" + msg.getUrl());
-                        System.err.println("UploadFile cf：" + cf.toString());
                     }
                     msg.setMsg(cf.getUploadCode().desc());
                     /**读取Excel内容，进行写表*/
@@ -269,7 +267,7 @@ public class EmployeeInfoController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("msg = " + toJson(msg));
+        System.err.println("msg = " + toJson(msg));
         return msg;
 
     }
