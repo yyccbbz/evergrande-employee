@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSPINIA | Basic Form</title>
+    <link href="#springUrl('/static/css/bootstrap.min.css')" rel="stylesheet">
+    <link href="#springUrl('/static/css/style.css')" rel="stylesheet">
+    <link href="#springUrl('/static/plugins/foundation-datepicker-1.5.6/css/foundation-datepicker.css')" rel="stylesheet">
+    <style>
+        .calendarBox {
+            position: relative;
+        }
+
+        .glyphicon-calendar {
+            position: absolute;
+            right: 20px;
+            top: 35px;
+        }
+
+        .btns {
+            float: right;
+            padding: 70px 40px 30px 0;
+        }
+
+        #submit {
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body class="white-bg">
+<div style="width: 100%;">
+    <form style="padding:45px 30px;" id="myForm" name="form" method="post" action="" onsubmit="">
+        <div class="row">
+            <div class="form-group col-xs-4">
+                <label class="form-label">姓名</label>
+                <input type="text" class="form-control" name="employee_name"/>
+            </div>
+            <div class="form-group col-xs-4">
+                <label class="form-label">证件号</label>
+                <input type="text" class="form-control" name="idcard"/>
+            </div>
+            <div class="form-group col-xs-4">
+                <label class="form-label">手机号</label>
+                <input type="text" class="form-control" name="mobile_phone"/>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="form-group col-xs-4">
+                <label class="form-label">EMS号</label>
+                <input type="text" class="form-control" name="ems_id"/>
+            </div>
+            <div class="form-group col-xs-4">
+                <label class="form-label">员工ID</label>
+                <input type="text" class="form-control" name="employee_id"/>
+            </div>
+
+            <span id="startSpan" style="opacity: 0;"></span>
+            <span id="endSpan" style="opacity: 0;"></span>
+        </div>
+
+        <div class="row btns">
+            <input type="reset" value="重置" class="btn resetBtn"/>
+            <input type="button" value="确定" class="btn btn-info yesBtn" id="submit"/>
+        </div>
+    </form>
+</div>
+<script src="#springUrl('/static/js/jquery-2.2.4.js')"></script>
+<script src="#springUrl('/static/plugins/layer-v3.0.3/layer/layer.js')"></script>
+<script src="#springUrl('/static/plugins/nice-validator-1.0.10/jquery.validator.js?local=zh-CN')"></script>
+<script src="#springUrl('/static/plugins/foundation-datepicker-1.5.6/js/foundation-datepicker.js')"></script>
+<script src="#springUrl('/static/plugins/foundation-datepicker-1.5.6/js/locales/foundation-datepicker.zh-CN.js')"></script>
+<script src="#springUrl('/static/js/common.js')"></script>
+<script type="text/javascript">
+
+    /**点击弹出层内确定按钮，将值传入父级页面并关闭弹出层*/
+    $(".yesBtn").click(function () {
+        var formData = window.parent.formToJsonStr($('#myForm').serialize());
+
+        //初始化列表
+        var oTable1 = new window.parent.TableInit();
+        oTable1.formData = formData;
+        oTable1.Init();
+
+        //该iframe页面关闭自身
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+
+    });
+
+</script>
+</body>
+</html>

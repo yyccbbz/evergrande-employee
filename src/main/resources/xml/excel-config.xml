@@ -36,4 +36,44 @@
 		<field name="update_time" title="更新时间" pattern="yyyy/MM/dd HH:mm:ss"/>
 	</excel>
 
+
+	<excel id="queryMarketing" class="com.baomidou.springwind.entity.MarketingQuery"
+		   sheetname="营销查询" defaultColumnWidth="5000" defaultAlign="center" enableStyle="true">
+		<field name="employee_name" title="姓名"/>
+		<field name="idcard" title="身份证号"/>
+		<field name="mobile_phone" title="手机号"/>
+		<field name="ems_id" title="EMS号"/>
+		<field name="employee_id" title="员工编码"/>
+		<field name="sex" title="性别"/>
+		<field name="age" title="年龄"/>
+		<field name="entry_date" title="入职时间"/>
+		<field name="quit_date" title="离职时间"/>
+		<field name="is_vip" title="是否VIP"/>
+		<field name="grp_service_years" title="服务年限"/>
+		<field name="company_name" title="公司名"/>
+		<field name="service_status" title="在职状态"/>
+		<field name="special_title" title="特殊名单类型"/>
+		<field name="is_special" title="是否特殊名单"/>
+		<field name="serialno" title="贷款申请流水号"/>
+		<field name="inputtime" title="贷款申请日期"/>
+		<field name="phasename" title="贷款状态"/>
+		<field name="loan_unfinish_amt" title="贷款剩余应还本金"/>
+		<field name="familyAddress" title="员工住址"/>
+		<field name="salary" title="员工收入情况"/>
+		<field name="businesssumasapply_amt" title="申请金额"/>
+		<field name="app_endtime" title="审批完成时间"/>
+		<field name="is_app_reject" title="是否审批拒绝"/>
+		<field name="app_reject_reason" title="审批拒绝原因"/>
+		<field name="approval_amt" title="审批金额"/>
+		<field name="signdate" title="签约时间"/>
+		<field name="sign_amt" title="签约金额"/>
+		<field name="putoutdate" title="放款时间"/>
+		<field name="putoutamt" title="放款金额"/>
+		<field name="businessterm" title="贷款类型（期数）"/>
+		<field name="businessrate_cut" title="费率-期初服务费"/>
+		<field name="businessrate_rate" title="费率-年利率"/>
+		<field name="businessrate_fee" title="费率-月管理费"/>
+		<field name="businessrate_fin" title="费率-罚息"/>
+	</excel>
+
 </excels>

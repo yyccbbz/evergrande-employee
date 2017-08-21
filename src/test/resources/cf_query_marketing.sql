@@ -13,41 +13,41 @@
 #drop table bigdata_ecf_bi.wy_temp;
 #create table bigdata_ecf_bi.wy_temp as
 select
- a.employee_name                                      #姓名
-,a.idcard                                             #身份证号
-,a.mobile_phone                                       #手机号
-,a.ems_id                                             #EMS号
-,a.employee_id                                        #员工编码
-,a.sex                                                #性别
-,a.age                                                #年龄
-,a.entry_date                                         #入职时间
-,coalesce(a.quit_date,'') as quit_date                #离职时间
-,a.is_vip                                             #是否VIP
-,a.grp_service_years                                  #服务年限
-,a.company_name                                       #公司名
-,a.service_status                                     #在职状态
-,a.special_title                                      #特殊名单类型
-,a.is_special                                         #是否特殊名单
-,b.serialno                                           #贷款申请流水号
-,c.inputtime                                          #贷款申请日期
-,b.phasename                                          #贷款状态
-,b.loan_unfinish_amt                                  #贷款剩余应还本金
-,c.familyAddress                                      #员工住址
-,c.salary                                             #员工收入情况
-,c.businesssum as apply_amt                           #申请金额
-,c.app_endtime                                        #审批完成时间
-,c.is_app_reject                                      #是否审批拒绝
-,c.app_reject_reason                                  #审批拒绝原因
-,coalesce(d.businesssum      ,'') as approval_amt     #审批金额	
-,coalesce(d.signdate         ,'') as signdate         #签约时间
-,coalesce(d.businesssum      ,'') as sign_amt         #签约金额
-,coalesce(e.batchdate        ,'') as putoutdate       #放款时间
-,coalesce(e.putoutamt        ,'') as putoutamt        #放款金额
-,coalesce(d.businessterm     ,'') as businessterm     #贷款类型（期数）
-,coalesce(d.businessrate_cut ,'') as businessrate_cut #费率-期初服务费
-,coalesce(d.businessrate_rate,'') as businessrate_rate#费率-年利率
-,coalesce(d.businessrate_fee ,'') as businessrate_fee #费率-月管理费
-,coalesce(d.businessrate_fin ,'') as businessrate_fin #费率-罚息
+ a.employee_name                                       #姓名
+,a.idcard                                              #身份证号
+,a.mobile_phone                                        #手机号
+,a.ems_id                                              #EMS号
+,a.employee_id                                         #员工编码
+,a.sex                                                 #性别
+,a.age                                                 #年龄
+,a.entry_date                                          #入职时间
+,coalesce(a.quit_date,'') as quit_date                 #离职时间
+,a.is_vip                                              #是否VIP
+,a.grp_service_years                                   #服务年限
+,a.company_name                                        #公司名
+,a.service_status                                      #在职状态
+,a.special_title                                       #特殊名单类型
+,a.is_special                                          #是否特殊名单
+,b.serialno                                            #贷款申请流水号
+,c.inputtime                                           #贷款申请日期
+,b.phasename                                           #贷款状态
+,b.loan_unfinish_amt                                   #贷款剩余应还本金
+,c.familyAddress                                       #员工住址
+,c.salary                                              #员工收入情况
+,c.businesssum as apply_amt                            #申请金额
+,c.app_endtime                                         #审批完成时间
+,c.is_app_reject                                       #是否审批拒绝
+,c.app_reject_reason                                   #审批拒绝原因
+,coalesce(d.businesssum      ,'') as approval_amt      #审批金额
+,coalesce(d.signdate         ,'') as signdate          #签约时间
+,coalesce(d.businesssum      ,'') as sign_amt          #签约金额
+,coalesce(e.batchdate        ,'') as putoutdate        #放款时间
+,coalesce(e.putoutamt        ,'') as putoutamt         #放款金额
+,coalesce(d.businessterm     ,'') as businessterm      #贷款类型（期数）
+,coalesce(d.businessrate_cut ,'') as businessrate_cut  #费率-期初服务费
+,coalesce(d.businessrate_rate,'') as businessrate_rate #费率-年利率
+,coalesce(d.businessrate_fee ,'') as businessrate_fee  #费率-月管理费
+,coalesce(d.businessrate_fin ,'') as businessrate_fin  #费率-罚息
 
 from bigdata_ecf_bi.t_evergrande_employee_tmp1 a
 join(
