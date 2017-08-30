@@ -5,7 +5,7 @@ Loan_Query - 员工贷信息
 <link href="#springUrl('/static/css/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
 #end
 #override("breadcrumb")
-<li><a>信贷系统</a></li><li class="active"><strong>员工信息</strong></li>
+<li><a>信贷系统</a></li><li class="active"><strong>营销查询</strong></li>
 #end
 #override("content")
 <div class="row">
@@ -18,13 +18,13 @@ Loan_Query - 员工贷信息
 			<i class="fa fa-download"></i>&nbsp;下载名单
 		</button>
 
-		<button class="btn btn-primary" onclick="downloadExcel(0)" type="button">
+		<!--<button class="btn btn-primary" onclick="downloadExcel(0)" type="button">
 			<i class="fa fa-download"></i>&nbsp;下载模板
 		</button>
 
 		<button class="btn btn-primary" onclick="uploadExcel()" type="button">
 			<i class="fa fa-upload"></i>&nbsp;上传EXCEL文件</button>
-		<input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>
+		<input type="file" id="fileExcel" name="fileExcel" accept=".xls,.xlsx" style="display: none"/>-->
 
 		<!-- 此处按钮级别权限控制，目前只有 admin 拥有该权限！ -->
 		#if ($SSOPermission.isActionable("10010"))
@@ -55,26 +55,45 @@ Loan_Query - 员工贷信息
 <script src="#springUrl('/static/js/base_list.js')"></script>
 <script src="#springUrl('/static/js/common.js')"></script>
 <script type="text/javascript">
-    var dataUrl = "#springUrl('/employeeInfo/getUserList.html')";
+    var dataUrl = "#springUrl('/queryMarketing/getUserList.html')";
     var dataColumns = [
-//        { field: 'id', 				title: '主键', sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'employee_name', 	title: '姓名', 		sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'idcard', 			title: '身份证号', 	sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'mobile_phone', 	title: '手机号', 		sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'ems_id', 			title: 'EMS号', 		sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'employee_id', 	title: '员工编码', 	sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'sex', 			title: '性别', 		sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'age', 			title: '年龄', 		sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'entry_date', 		title: '入职时间', 	sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'quit_date', 		title: '离职时间', 	sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'service_years', 	title: '服务年限', 	sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'company_name', 	title: '公司名', 		sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'service_status', 	title: '在职状态', 	sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'phasename', 		title: '贷款状态', 	sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'employee_name', title: '姓名', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'idcard', title: '身份证号', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'mobile_phone', title: '手机号', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'ems_id', title: 'EMS号', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'employee_id', title: '员工编码', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'sex', title: '性别', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'age', title: '年龄', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'entry_date', title: '入职时间', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'quit_date', title: '离职时间', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'is_vip', title: '是否VIP', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'grp_service_years', title: '服务年限', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'company_name', title: '公司名', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'service_status', title: '在职状态', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'special_title', title: '特殊名单类型', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'is_special', title: '是否特殊名单', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'serialno', title: '贷款申请流水号', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'inputtime', title: '贷款申请日期', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'phasename', title: '贷款状态', sortable:'true',  align: 'center', valign: 'middle' },
         { field: 'loan_unfinish_amt', title: '贷款剩余应还本金', sortable:'true',  align: 'center', valign: 'middle' },
-        { field: 'leave_control', 	title: '离职管控方式', sortable:'true',  align: 'center', valign: 'middle' }
+        /*{ field: 'familyAddress', title: '员工住址', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'salary', title: '员工收入情况', sortable:'true',  align: 'center', valign: 'middle' },*/
+        { field: 'businesssumasapply_amt', title: '申请金额', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'app_endtime', title: '审批完成时间', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'is_app_reject', title: '是否审批拒绝', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'app_reject_reason', title: '审批拒绝原因', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'approval_amt', title: '审批金额', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'signdate', title: '签约时间', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'sign_amt', title: '签约金额', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'putoutdate', title: '放款时间', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'putoutamt', title: '放款金额', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'businessterm', title: '贷款类型（期数）', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'businessrate_cut', title: '费率-期初服务费', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'businessrate_rate', title: '费率-年利率', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'businessrate_fee', title: '费率-月管理费', sortable:'true',  align: 'center', valign: 'middle' },
+        { field: 'businessrate_fin', title: '费率-罚息', sortable:'true',  align: 'center', valign: 'middle' }
 		<!-- 此处按钮级别权限控制,目前只有 admin 拥有该权限! -->
-		#if ($SSOPermission.isActionable("10010"))
+		/*#if ($SSOPermission.isActionable("10010"))
         ,{
             title: '操作',
             align: "center",
@@ -86,7 +105,7 @@ Loan_Query - 员工贷信息
 
             }
         }
-    	#end
+    	#end*/
     ];
 
 	function dataQueryParams(params,formData) {
@@ -106,7 +125,7 @@ Loan_Query - 员工贷信息
     function addTestData() {
         $.ajax({
             type: "get",
-            url: "#springUrl('/employeeInfo/addTestData')",
+            url: "#springUrl('/queryMarketing/addTestData')",
             datatype: "text",
             success: function (data) {
                 if(data == 'true'){
@@ -119,7 +138,7 @@ Loan_Query - 员工贷信息
     /**点击搜索按钮，弹出搜索条件的弹层*/
     function searchByCondition(){
         var title = "请选择筛选条件";
-        var url = "#springUrl('/employeeInfo/search.html')";
+        var url = "#springUrl('/queryMarketing/search.html')";
         layer.open({
             type: 2,
             title: title,
@@ -143,7 +162,7 @@ Loan_Query - 员工贷信息
 	function downloadExcel(flag) {
         // 模拟Ajax获取
         downLoadFile({
-            url: "#springUrl('/employeeInfo/downloadExcel.html')", //请求的url
+            url: "#springUrl('/queryMarketing/downloadExcel.html')", //请求的url
             data: {search: $("#txt_search").val() ,flag: flag}	   //要发送的数据
         });
     }
@@ -158,7 +177,7 @@ Loan_Query - 员工贷信息
             layer.confirm('确定上传吗？', {
                 btn: ['确定', '取消'] // 按钮
             }, function () {
-                var url = "#springUrl('/employeeInfo/uploadExcel/')";
+                var url = "#springUrl('/queryMarketing/uploadExcel/')";
                 var fileId = "fileExcel";
                 $.ajaxFileUpload({
                     url: url,                              //用于文件上传的服务器端请求地址
@@ -189,7 +208,7 @@ Loan_Query - 员工贷信息
         }, function () {
             $.ajax({
                 type: "POST",
-                url: "#springUrl('/employeeInfo/delUser/')" + userId,
+                url: "#springUrl('/queryMarketing/delUser/')" + userId,
                 datatype: "text",
                 success: function (data) {
                     if(data == 'true'){
@@ -205,7 +224,7 @@ Loan_Query - 员工贷信息
 
     function editUser(idcard) {
         var title = "新增用户";
-        var url = "#springUrl('/employeeInfo/edit.html')";
+        var url = "#springUrl('/queryMarketing/edit.html')";
         if (idcard != null) {
             title = "编辑用户";
             url = url + "?idcard=" + idcard;

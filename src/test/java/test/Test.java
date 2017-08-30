@@ -29,13 +29,13 @@ public class Test {
                 String s2 = strs[1];//中文
 //                String s3 = strs[2];//类属性
 
-//                String field = "{ field: '" + s1 + "', title: '" + s2 + "', sortable:'true',  align: 'center', valign: 'middle' },";
-//                System.err.println(field);
+                String field = "{ field: '" + s1 + "', title: '" + s2 + "', sortable:'true',  align: 'center', valign: 'middle' },";
+                System.err.println(field);
 
-                String str = "/** " + s2 + " */";
+                /*String str = "*//** " + s2 + " *//*";
                 System.err.println(str);
                 String s = "private String " + s1 +";";
-                System.err.println(s);
+                System.err.println(s);*/
 
 
 //                String excelLine = "<field name=\""+s1+"\" title=\""+s2+"\"/>";

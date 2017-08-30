@@ -94,8 +94,8 @@ public class QueryMarketingController extends BaseController {
 
     /**
      * CRUD
-     * http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188
-     * &employee_name=&idcard=&mobile_phone=&ems_id=&employee_id=
+     * http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=189
+     * &employee_name=?&idcard=?&mobile_phone=?&ems_id=?&employee_id=?
      */
     @ResponseBody
     @Permission("5001")
