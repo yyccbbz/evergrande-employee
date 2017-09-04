@@ -1,9 +1,6 @@
 package com.baomidou.springwind.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.parser.Feature;
 import com.baomidou.framework.controller.SuperController;
 import com.baomidou.framework.mail.MailHelper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -14,22 +11,18 @@ import com.baomidou.springwind.excel.parsing.ExcelHeader;
 import com.baomidou.springwind.service.IPrivilegeService;
 import com.baomidou.springwind.service.IUserService;
 import com.baomidou.springwind.service.support.HttpAPIService;
-import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -55,6 +48,8 @@ public class BaseController extends SuperController implements HandlerIntercepto
     @Autowired
     protected ExcelContext excelContext;
 
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
@@ -65,7 +60,7 @@ public class BaseController extends SuperController implements HandlerIntercepto
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
         /*
-		 * 方法调用后调用该方法，返回数据给请求页
+         * 方法调用后调用该方法，返回数据给请求页
 		 */
         if (isLegalView(modelAndView)) {
             modelAndView.addObject("currentUser", userService.selectById(getCurrentUserId()));
@@ -97,7 +92,6 @@ public class BaseController extends SuperController implements HandlerIntercepto
         }
         return legal;
     }
-
 
 
     /**

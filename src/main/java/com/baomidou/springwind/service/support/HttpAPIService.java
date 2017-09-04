@@ -59,6 +59,34 @@ public class HttpAPIService {
     }
 
     /**
+     * GBK
+     * @param url
+     * @return
+     * @throws ClientProtocolException
+     * @throws IOException
+     */
+    public String doGetGBK(String url) throws ClientProtocolException, IOException {
+        // 创建http GET请求
+        HttpGet httpGet = new HttpGet(url);
+        httpGet.setConfig(this.requestConfig);
+        CloseableHttpResponse response = null;
+        try {
+            // 执行请求
+            response = httpClient.execute(httpGet);
+            // 判断返回状态是否为200
+            if (response.getStatusLine().getStatusCode() == 200) {
+                return EntityUtils.toString(response.getEntity(), "GBK");
+            }
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+        return null;
+    }
+
+
+    /**
      * 带有参数的GET请求
      *
      * @param url
@@ -162,7 +190,7 @@ public class HttpAPIService {
      * 指定POST请求
      *
      * @param url
-     * @param param 请求参数
+     * @param json 请求参数
      * @return 状态码和请求的body
      * @throws IOException
      */

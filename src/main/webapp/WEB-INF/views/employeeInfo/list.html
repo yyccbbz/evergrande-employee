@@ -31,11 +31,11 @@ Loan_Query - 员工贷信息
 
 		<!--<button class="btn btn-primary" onclick="editUser(null)" type="button">
 			<i class="fa fa-user-plus"></i>&nbsp;添加用户
-		</button>
-
-		<button class="btn btn-primary" onclick="addTestData()" type="button">
-			<i class="fa fa-database"></i>&nbsp;添加测试数据
 		</button>-->
+
+		<button class="btn btn-primary" onclick="sendSms()" type="button">
+			<i class="fa fa-database"></i>&nbsp;SendSMS
+		</button>
 
 		#end
 	</div>
@@ -103,15 +103,13 @@ Loan_Query - 员工贷信息
     }
 
     /*添加测试数据*/
-    function addTestData() {
+    function sendSms() {
         $.ajax({
             type: "get",
-            url: "#springUrl('/employeeInfo/addTestData')",
+            url: "#springUrl('/employeeInfo/send')",
             datatype: "text",
             success: function (data) {
-                if(data == 'true'){
-                    $('#dataTable').bootstrapTable('refresh',{url:dataUrl});
-                }
+                alert(data);
             }
         });
     }

@@ -9,6 +9,7 @@ import com.baomidou.framework.upload.UploadMsg;
 import com.baomidou.framework.upload.UploadMultipartRequest;
 import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.springwind.common.http.HttpResult;
 import com.baomidou.springwind.common.utils.StringUtil;
 import com.baomidou.springwind.entity.EmployeeInfo;
 import com.baomidou.springwind.excel.result.ExcelImportResult;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.*;
 
 /**
@@ -41,11 +43,12 @@ public class EmployeeInfoController extends BaseController {
 
     private final static int MAX_POST_SIZE = 30 * 1024 * 1024;
 
-    @Autowired
-    private HttpAPIService httpAPIService;
 
     @Autowired
     private IEmployeeInfoService employeeInfoService;
+
+    @Autowired
+    private HttpAPIService httpAPIService;
 
     /**
      * excel导出相关
@@ -56,6 +59,14 @@ public class EmployeeInfoController extends BaseController {
     private String excelId;
     @Value("${employeeInfo.fields}")
     private String excelFields;
+
+    /**
+     * sms
+     */
+    @Value("${sms.mobiles}")
+    private String mobiles;
+    @Value("${sms.content}")
+    private String content;
 
     /**
      * 页面跳转
@@ -106,7 +117,7 @@ public class EmployeeInfoController extends BaseController {
     @RequestMapping(value = "/getUserList")
     public String getUserList(@RequestParam("_search") String _search) {
 
-        System.err.println("筛选条件 formData =" + _search);
+//        System.err.println("筛选条件 formData =" + _search);
 
         Page<EmployeeInfo> page = getPage();
         int current = page.getCurrent();
@@ -122,7 +133,7 @@ public class EmployeeInfoController extends BaseController {
                                    + "&mobile_phone=" + StringUtil.getStrEmpty(info.getMobile_phone())
                                    + "&ems_id=" + StringUtil.getStrEmpty(info.getEms_id())
                                    + "&employee_id=" + StringUtil.getStrEmpty(info.getEmployee_id());
-        System.err.println("url =" + url);
+//        System.err.println("url =" + url);
 
         String dataStr = "";
         try {
@@ -130,14 +141,14 @@ public class EmployeeInfoController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("dataStr = " + dataStr);
+//        System.out.println("dataStr = " + dataStr);
 
         JSONArray values = JSON.parseObject(dataStr, Feature.OrderedField).getJSONObject("details")
                 .getJSONObject("list").getJSONArray("values");
-        System.out.println("values = " + values);
+//        System.out.println("values = " + values);
 
         List<EmployeeInfo> list = JSONObject.parseArray(values.toJSONString(), EmployeeInfo.class);
-        System.out.println("list = " + list);
+//        System.out.println("list = " + list);
 
         //处理分页
         List<EmployeeInfo> subList = null;
@@ -210,7 +221,7 @@ public class EmployeeInfoController extends BaseController {
         }
         JSONArray values = JSON.parseObject(dataStr, Feature.OrderedField).getJSONObject("details")
                 .getJSONObject("list").getJSONArray("values");
-        System.err.println("values = " + values);
+//        System.err.println("values = " + values);
 
         List<EmployeeInfo> beans = JSONObject.parseArray(values.toJSONString(), EmployeeInfo.class);
 
@@ -281,5 +292,45 @@ public class EmployeeInfoController extends BaseController {
         Boolean b = employeeInfoService.insertBatch(list);
         return b.toString();
     }
+
+
+    @ResponseBody
+    @Permission("5001")
+    @RequestMapping("send")
+    public String sendSms() {
+//        String ip = "118.145.22.172";
+//        String port = "9888";
+//        String userId = "3047";
+//        String Password = "HDjf_170901";
+//        String mobiles = "13681691680,18018558787,13918010283,13585952427,13918487436,18637010312";
+//        String content = "尊敬的用户，这是一条北京东方般若短信平台的测试短信，如果收到此信息，说明群发成功。";
+
+        String base_url = "http://118.145.22.172:9888/smsservice/SendSMS?UserId=3047&Password=HDjf_170901&";
+
+        String result = "";
+        HttpResult httpResult = null;
+
+        /**
+         * http://118.145.22.172:9888/smsservice/SendSMS?UserId=xxx&Password=xxx&Mobiles=13121848041&Content=hello&SenderAddr=123
+         */
+        try {
+            content = URLEncoder.encode(content, "GBK");
+            System.out.println("content = " + content);
+
+            String url = base_url + "&Mobiles=" + mobiles + "&Content=" + content;
+            System.out.println("url = " + url);
+
+//            result = httpAPIService.doGetGBK(url);
+            httpResult = httpAPIService.doPost(url);
+            System.out.println("result = " + result);
+            System.out.println("httpResult = " + httpResult.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return toJson(httpResult);
+    }
+
+
 
 }
