@@ -39,7 +39,7 @@ import java.util.*;
 @RequestMapping("/employeeInfo")
 public class EmployeeInfoController extends BaseController {
 
-    private final String BASE_HTTP_URL = "http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=188";
+    private final String BASE_HTTP_URL = "http://10.127.3.101:8080/dataservice/getconfig.do?id=188";
 
     private final static int MAX_POST_SIZE = 30 * 1024 * 1024;
 
@@ -133,7 +133,7 @@ public class EmployeeInfoController extends BaseController {
                                    + "&mobile_phone=" + StringUtil.getStrEmpty(info.getMobile_phone())
                                    + "&ems_id=" + StringUtil.getStrEmpty(info.getEms_id())
                                    + "&employee_id=" + StringUtil.getStrEmpty(info.getEmployee_id());
-//        System.err.println("url =" + url);
+        System.err.println("url =" + url);
 
         String dataStr = "";
         try {
@@ -153,7 +153,12 @@ public class EmployeeInfoController extends BaseController {
         //处理分页
         List<EmployeeInfo> subList = null;
         if(list != null && list.size() >0){
-            subList = list.subList((current - 1) * size, current * size - 1);
+            // 最后一页判断
+            if (current == list.size() % size) {
+                subList = list.subList((current - 1) * size, list.size());
+            }else {
+                subList = list.subList((current - 1) * size, current * size - 1);
+            }
         }
         page.setTotal(list.size());
         page.setRecords(subList);

@@ -36,7 +36,7 @@ import java.util.List;
 @RequestMapping("/queryMarketing")
 public class QueryMarketingController extends BaseController {
 
-    private final String BASE_HTTP_URL = "http://ds.idc.xiwanglife.com/dataservice/getconfig.do?id=189";
+    private final String BASE_HTTP_URL = "http://10.127.3.101:8080/dataservice/getconfig.do?id=189";
 
     private final static int MAX_POST_SIZE = 30 * 1024 * 1024;
 
@@ -102,7 +102,7 @@ public class QueryMarketingController extends BaseController {
     @RequestMapping(value = "/getUserList")
     public String getUserList(@RequestParam("_search") String _search) {
 
-        System.err.println("筛选条件 formData =" + _search);
+//        System.err.println("筛选条件 formData =" + _search);
 
         Page<MarketingQuery> page = getPage();
         int current = page.getCurrent();
@@ -118,7 +118,7 @@ public class QueryMarketingController extends BaseController {
                 + "&mobile_phone=" + StringUtil.getStrEmpty(info.getMobile_phone())
                 + "&ems_id=" + StringUtil.getStrEmpty(info.getEms_id())
                 + "&employee_id=" + StringUtil.getStrEmpty(info.getEmployee_id());
-        System.err.println("url =" + url);
+//        System.err.println("url =" + url);
 
         String dataStr = "";
         try {
@@ -126,19 +126,24 @@ public class QueryMarketingController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("dataStr = " + dataStr);
+//        System.out.println("dataStr = " + dataStr);
 
         JSONArray values = JSON.parseObject(dataStr, Feature.OrderedField).getJSONObject("details")
                 .getJSONObject("list").getJSONArray("values");
-        System.out.println("values = " + values);
+//        System.out.println("values = " + values);
 
         List<MarketingQuery> list = JSONObject.parseArray(values.toJSONString(), MarketingQuery.class);
-        System.out.println("list = " + list);
+//        System.out.println("list = " + list);
 
         //处理分页
         List<MarketingQuery> subList = null;
         if (list != null && list.size() > 0) {
-            subList = list.subList((current - 1) * size, current * size - 1);
+            // 最后一页判断
+            if (current == list.size() % size) {
+                subList = list.subList((current - 1) * size, list.size());
+            }else {
+                subList = list.subList((current - 1) * size, current * size - 1);
+            }
         }
         page.setTotal(list.size());
         page.setRecords(subList);
