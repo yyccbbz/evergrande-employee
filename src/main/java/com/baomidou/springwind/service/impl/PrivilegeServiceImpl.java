@@ -85,22 +85,32 @@ public class PrivilegeServiceImpl extends BaseServiceImpl<PrivilegeMapper, Privi
 
     /**
      * 按钮级别、权限验证，生产环境建议加上缓存处理。
-     *
+     * <p>
      * 演示  admin 返回 true
      *
-     * @param token
-     * 				SSO 票据顶级父类
-     * @param permission
-     * 				操作权限编码
+     * @param token      SSO 票据顶级父类
+     * @param permission 操作权限编码
      * @return
      */
     @Override
-    public boolean isActionable( Token token, String permission ) {
+    public boolean isActionable(Token token, String permission) {
         System.err.println(" 请求的权限：isActionable =" + permission);
         //TODO 该处目前只有一号用户 admin，待修改
-        if ( token.getId() == 1L ) {
-            return true;
+
+        List<Privilege> privileges = selectAllByUserId(token.getId());
+
+        if (privileges != null && privileges.size() > 0) {
+            ArrayList<String> codes = new ArrayList<>();
+            for (Privilege privilege : privileges) {
+                codes.add(privilege.getPermCode());
+            }
+            if (codes.contains(permission)) {
+                return true;
+            }
         }
+//        if ( token.getId() == 1L ) {
+//            return true;
+//        }
         return false;
     }
 

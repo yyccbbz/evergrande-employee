@@ -92,15 +92,23 @@ function getDouble(str) {
 
 /**
  * 用户 User
- * '2、普通用户 1、管理员 3、超级管理员'
+ *  1    超级管理员
+    2    管理员
+    3    HR管理员
+    4    HR普通用户
+    5    营销管理员
  */
 function formatUserType(type){
-    if (type == 2) {
-        return '普通用户';
-    } else if (type == 1) {
+    if (type == 1) {
+        return '超级管理员';
+    } else if (type == 2) {
         return '管理员';
     } else if (type == 3) {
-        return '超级管理员';
+        return 'HR管理员';
+    } else if (type == 4) {
+        return 'HR普通用户';
+    } else if (type == 5) {
+        return '营销管理员';
     } else {
         return '';
     }
